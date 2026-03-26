@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Porto Vale Consórcio — Realize seu imóvel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f0f2f5;
+      --card-bg:   #ffffff;
+      --accent:    #29abe2;
+      --accent-dk: #1a8cbf;
+      --text-dark: #111827;
+      --text-mid:  #4b5563;
+      --text-light:#9ca3af;
+      --border:    #d1d5db;
+      --success:   #10b981;
+      --radius:    14px;
+      --trans:     0.25s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+
+    /* ─── Header ─────────────────────────────────────────────────── */
+    header {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 48px;
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo img {
+      height: 48px;
+      width: auto;
+      display: block;
+    }
+
+    /* ─── Aurora keyframes ───────────────────────────────────────── */
+    @keyframes aurora-1 {
+      0%   { transform: translate(0%, 0%) scale(1); }
+      25%  { transform: translate(20%, -20%) scale(1.2); }
+      50%  { transform: translate(-20%, 20%) scale(0.8); }
+      75%  { transform: translate(10%, -10%) scale(1.1); }
+      100% { transform: translate(0%, 0%) scale(1); }
+    }
+    @keyframes aurora-2 {
+      0%   { transform: translate(0%, 0%) scale(1); }
+      25%  { transform: translate(-20%, 20%) scale(1.1); }
+      50%  { transform: translate(20%, -20%) scale(0.9); }
+      75%  { transform: translate(-10%, 10%) scale(1.2); }
+      100% { transform: translate(0%, 0%) scale(1); }
+    }
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Hero ───────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px;
+      min-height: calc(100vh - 85px);
+      background: var(--bg);
+    }
+
+    /* Aurora blobs */
+    .hero::before,
+    .hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .hero::before {
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(41,171,226,0.28), transparent 70%);
+      top: -15%; left: 20%;
+      animation: aurora-1 20s ease-in-out infinite;
+    }
+    .hero::after {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(100,130,160,0.18), transparent 70%);
+      bottom: -15%; right: 20%;
+      animation: aurora-2 20s ease-in-out infinite;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      font-size: clamp(38px, 6vw, 68px);
+      font-weight: 700;
+      line-height: 1.12;
+      max-width: 640px;
+      margin-bottom: 20px;
+      color: #4a5568;
+      animation: heroFadeUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.2s both;
+    }
+
+    .hero-sub {
+      font-size: clamp(15px, 1.8vw, 17px);
+      color: var(--text-mid);
+      max-width: 460px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      font-weight: 400;
+      animation: heroFadeUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.42s both;
+    }
+
+    .btn-cta-wrap {
+      animation: heroFadeUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.62s both;
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 36px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dk));
+      border: none;
+      border-radius: 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(22,167,224,0.18);
+      transition: transform var(--trans), box-shadow var(--trans);
+      letter-spacing: 0.01em;
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 22px rgba(22,167,224,0.25);
+    }
+
+    .btn-cta:active { transform: translateY(0); }
+
+    .btn-cta svg {
+      width: 20px; height: 20px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .form-wrapper.open {
+      animation: fadeSlideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Form wrapper ───────────────────────────────────────────── */
+    .form-wrapper {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      padding: 0 24px 80px;
+    }
+
+    .form-card {
+      width: 100%;
+      max-width: 640px;
+      background: var(--card-bg);
+      border-radius: 24px;
+      box-shadow:
+        0 0 0 1px #e5e7eb,
+        0 8px 32px rgba(0,0,0,0.08),
+        0 2px 8px rgba(0,0,0,0.04);
+      overflow: hidden;
+    }
+
+    /* ─── Progress bar ───────────────────────────────────────────── */
+    .progress-bar-wrap {
+      background: #f8f9fb;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 28px 32px 0;
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .progress-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      transition: color var(--trans);
+      cursor: pointer;
+      padding: 2px 0;
+    }
+
+    .progress-label:hover {
+      color: var(--accent);
+    }
+
+    .progress-label.active {
+      color: var(--accent);
+    }
+
+    .progress-label.done {
+      color: var(--success);
+    }
+
+    .progress-track {
+      height: 5px;
+      background: #d1d5db;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      overflow: visible;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--accent), #5ecef5);
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px; height: 12px;
+      background: #fff;
+      border: 3px solid var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(22,167,224,0.2);
+    }
+
+    /* ─── Step container ─────────────────────────────────────────── */
+    .steps-container {
+      padding: 32px 32px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step {
+      display: none;
+      animation: none;
+    }
+
+    .step.active {
+      display: block;
+      animation: slideIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .step.slide-out {
+      animation: slideOut 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(28px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideOut {
+      from { opacity: 1; transform: translateX(0); }
+      to   { opacity: 0; transform: translateX(-28px); }
+    }
+
+    @keyframes slideInBack {
+      from { opacity: 0; transform: translateX(-28px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .step.active.from-back {
+      animation: slideInBack 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ─── Step header ─────────────────────────────────────────────── */
+    .step-header {
+      margin-bottom: 28px;
+    }
+
+    .step-number {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .step-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.3;
+    }
+
+    .step-subtitle {
+      font-size: 14px;
+      color: var(--text-mid);
+      margin-top: 6px;
+      font-weight: 400;
+    }
+
+    /* ─── Option cards ────────────────────────────────────────────── */
+    .option-grid {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .option-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+    .option-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .option-grid.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+    .option-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 12px;
+      background: #fff;
+      border: 2px solid #e5e7eb;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: border-color var(--trans), background var(--trans), transform var(--trans), box-shadow var(--trans);
+      text-align: center;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .option-card:hover {
+      border-color: var(--accent);
+      background: rgba(22,167,224,0.04);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(22,167,224,0.12);
+    }
+
+    .option-card.selected {
+      border-color: var(--accent);
+      background: rgba(22,167,224,0.07);
+      box-shadow: 0 4px 16px rgba(22,167,224,0.18);
+      transform: translateY(-2px);
+    }
+
+    .option-card.selected::after {
+      content: '';
+      position: absolute;
+      top: 8px; right: 8px;
+      width: 18px; height: 18px;
+      background: var(--accent);
+      border-radius: 50%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-5' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+      background-size: 10px 10px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .option-icon {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .option-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.3;
+    }
+
+    .option-card.selected .option-label {
+      color: var(--accent-dk);
+    }
+
+    /* ─── Two-option (yes/no) ─────────────────────────────────────── */
+    .option-card.inline {
+      flex-direction: row;
+      padding: 13px 18px;
+      gap: 12px;
+      justify-content: flex-start;
+    }
+
+    .option-card.inline .option-icon { font-size: 18px; }
+
+    /* ─── Slider ─────────────────────────────────────────────────── */
+    .slider-group {
+      margin-bottom: 24px;
+    }
+
+    .slider-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .slider-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .slider-value {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .slider-range {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-light);
+      margin-top: 6px;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 5px;
+      border-radius: 100px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: #fff;
+      border: 3px solid var(--accent);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(22,167,224,0.3);
+      transition: transform var(--trans), box-shadow var(--trans);
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover,
+    input[type="range"]:active::-webkit-slider-thumb {
+      transform: scale(1.2);
+      box-shadow: 0 2px 16px rgba(22,167,224,0.45);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: #fff;
+      border: 3px solid var(--accent);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(22,167,224,0.3);
+    }
+
+    /* ─── Form fields ─────────────────────────────────────────────── */
+    .field-group {
+      margin-bottom: 20px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 7px;
+    }
+
+    label span.req {
+      color: var(--accent);
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      background: #fff;
+      border: 2px solid #e5e7eb;
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color var(--trans), box-shadow var(--trans);
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(22,167,224,0.12);
+    }
+
+    input::placeholder { color: var(--text-light); }
+
+    .select-wrap {
+      position: relative;
+    }
+
+    .select-wrap::after {
+      content: '';
+      position: absolute;
+      right: 14px; top: 50%;
+      transform: translateY(-50%);
+      width: 0; height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid var(--text-mid);
+      pointer-events: none;
+    }
+
+    .select-wrap select {
+      padding-right: 38px;
+      cursor: pointer;
+    }
+
+    /* ─── Section label ───────────────────────────────────────────── */
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-mid);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    /* ─── Navigation buttons ─────────────────────────────────────── */
+    .form-nav {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .btn-back {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 14px 22px;
+      background: transparent;
+      border: 2px solid #d1d5db;
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-mid);
+      cursor: pointer;
+      transition: border-color var(--trans), color var(--trans), background var(--trans);
+      white-space: nowrap;
+    }
+
+    .btn-back:hover {
+      border-color: var(--text-mid);
+      color: var(--text-dark);
+      background: rgba(0,0,0,0.03);
+    }
+
+    .btn-next {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 15px 28px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dk));
+      border: none;
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      transition: transform var(--trans), box-shadow var(--trans), opacity var(--trans);
+      box-shadow: 0 4px 16px rgba(22,167,224,0.35);
+      letter-spacing: 0.01em;
+    }
+
+    .btn-next:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(22,167,224,0.45);
+    }
+
+    .btn-next:active { transform: translateY(0); }
+
+    .btn-next svg,
+    .btn-back svg {
+      width: 18px; height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    /* ─── Error message ───────────────────────────────────────────── */
+    .error-msg {
+      display: none;
+      font-size: 12px;
+      color: #ef4444;
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    .error-msg.visible { display: block; }
+
+    input.error { border-color: #ef4444 !important; }
+
+    /* ─── Success screen ─────────────────────────────────────────── */
+    .success-screen {
+      display: none;
+      padding: 48px 32px;
+      text-align: center;
+    }
+
+    .success-screen.active { display: block; }
+
+    .success-badge {
+      width: 80px; height: 80px;
+      background: linear-gradient(135deg, var(--success), #059669);
+      border-radius: 50%;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(16,185,129,0.35);
+      animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    .success-badge svg {
+      width: 38px; height: 38px;
+      stroke: #fff;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .success-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .success-text {
+      font-size: 15px;
+      color: var(--text-mid);
+      max-width: 380px;
+      margin: 0 auto 32px;
+      line-height: 1.65;
+    }
+
+    .next-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .next-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      animation: slideIn 0.4s ease both;
+    }
+
+    .next-step:nth-child(1) { animation-delay: 0.2s; }
+    .next-step:nth-child(2) { animation-delay: 0.35s; }
+    .next-step:nth-child(3) { animation-delay: 0.5s; }
+
+    .step-num {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dk));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .step-content strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 3px;
+    }
+
+    .step-content span {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+
+    /* ─── Responsivo ─────────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      header { padding: 16px 20px; }
+      .header-badge { display: none; }
+      .hero { padding: 44px 20px 0; }
+      .hero-stats { gap: 20px; }
+      .stat-value { font-size: 22px; }
+      .steps-container { padding: 24px 20px 20px; }
+      .progress-bar-wrap { padding: 22px 20px 0; }
+      .option-grid.cols-4 { grid-template-columns: 1fr 1fr; }
+      .option-grid.cols-3 { grid-template-columns: 1fr 1fr; }
+      .field-row { grid-template-columns: 1fr; }
+      .btn-back { padding: 14px 16px; }
+      .success-screen { padding: 36px 20px; }
+    }
+
+    @media (max-width: 400px) {
+      .option-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── HEADER ──────────────────────────────────────────────────── -->
+  <header>
+    <a href="#" class="logo">
+      <img src="imagem/logo-portovale.png" alt="Porto Vale Consórcio" />
+    </a>
+  </header>
+
+  <!-- ─── HERO ────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Ambiente de teste</h1>
+      <p class="hero-sub">
+        V1 formulário: Mais completo para melhorar a qualificação dos leads e validação do seu fluxo de conversão.
+      </p>
+      <div class="btn-cta-wrap">
+        <button class="btn-cta" id="btnCTA" onclick="openForm()">
+          Simular
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FORM ─────────────────────────────────────────────────────── -->
+  <div class="form-wrapper" id="formWrapper" style="display:none">
+    <div class="form-card" id="formCard">
+
+      <!-- Progress bar -->
+      <div class="progress-bar-wrap" id="progressWrap">
+        <div class="progress-labels" id="progressLabels">
+          <span class="progress-label active" data-step="1">Objetivo</span>
+          <span class="progress-label" data-step="2">Imóvel</span>
+          <span class="progress-label" data-step="3">Perfil</span>
+          <span class="progress-label" data-step="4">Financeiro</span>
+          <span class="progress-label" data-step="5">Contato</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill" style="width: 10%"></div>
+        </div>
+      </div>
+
+      <!-- Steps -->
+      <div class="steps-container" id="stepsContainer">
+
+        <!-- ── ETAPA 1 – Objetivo ── -->
+        <div class="step active" id="step-1">
+          <div class="step-header">
+            <p class="step-number">Etapa 1 de 5</p>
+            <h2 class="step-title">Qual é o seu objetivo com o consórcio?</h2>
+            <p class="step-subtitle">Selecione a opção que melhor representa seu plano.</p>
+          </div>
+
+          <div class="option-grid cols-2">
+            <div class="option-card" data-group="objetivo" data-value="primeiro-imovel">
+              <span class="option-icon">🏠</span>
+              <span class="option-label">Primeiro imóvel</span>
+            </div>
+            <div class="option-card" data-group="objetivo" data-value="segundo-imovel">
+              <span class="option-icon">🏡</span>
+              <span class="option-label">Segundo imóvel</span>
+            </div>
+            <div class="option-card" data-group="objetivo" data-value="investimento">
+              <span class="option-icon">📈</span>
+              <span class="option-label">Investimento / Aluguel</span>
+            </div>
+            <div class="option-card" data-group="objetivo" data-value="construir">
+              <span class="option-icon">🏗️</span>
+              <span class="option-label">Construir / Terreno</span>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <button class="btn-next" onclick="nextStep(1)">
+              Próximo
+              <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ── ETAPA 2 – Imóvel ── -->
+        <div class="step" id="step-2">
+          <div class="step-header">
+            <p class="step-number">Etapa 2 de 5</p>
+            <h2 class="step-title">Sobre o imóvel desejado</h2>
+            <p class="step-subtitle">Tipo, valor e localização.</p>
+          </div>
+
+          <p class="section-label">Tipo de imóvel</p>
+          <div class="option-grid cols-3" style="margin-bottom:28px">
+            <div class="option-card" data-group="tipo" data-value="apartamento">
+              <span class="option-icon">🏢</span>
+              <span class="option-label">Apartamento</span>
+            </div>
+            <div class="option-card" data-group="tipo" data-value="casa">
+              <span class="option-icon">🏠</span>
+              <span class="option-label">Casa</span>
+            </div>
+            <div class="option-card" data-group="tipo" data-value="terreno">
+              <span class="option-icon">🌿</span>
+              <span class="option-label">Terreno</span>
+            </div>
+            <div class="option-card" data-group="tipo" data-value="comercial">
+              <span class="option-icon">🏬</span>
+              <span class="option-label">Comercial</span>
+            </div>
+            <div class="option-card" data-group="tipo" data-value="condominio">
+              <span class="option-icon">🏘️</span>
+              <span class="option-label">Condomínio</span>
+            </div>
+            <div class="option-card" data-group="tipo" data-value="outro">
+              <span class="option-icon">📋</span>
+              <span class="option-label">Outro</span>
+            </div>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span class="slider-label">Valor da carta de crédito</span>
+              <span class="slider-value" id="creditoVal">R$ 350.000</span>
+            </div>
+            <input type="range" id="creditoSlider" min="100000" max="1500000" step="10000" value="350000"
+              oninput="updateSlider('creditoSlider','creditoVal', formatCurrency)" />
+            <div class="slider-range">
+              <span>R$ 100 mil</span>
+              <span>R$ 1,5 milhão</span>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="estado">Estado onde deseja o imóvel</label>
+            <div class="select-wrap">
+              <select id="estado">
+                <option value="">Selecione o estado...</option>
+                <option>AC</option><option>AL</option><option>AM</option><option>AP</option>
+                <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+                <option>GO</option><option>MA</option><option>MG</option><option>MS</option>
+                <option>MT</option><option>PA</option><option>PB</option><option>PE</option>
+                <option>PI</option><option>PR</option><option>RJ</option><option>RN</option>
+                <option>RO</option><option>RR</option><option>RS</option><option>SC</option>
+                <option>SE</option><option>SP</option><option>TO</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <button class="btn-back" onclick="prevStep(2)">
+              <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+              Voltar
+            </button>
+            <button class="btn-next" onclick="nextStep(2)">
+              Próximo
+              <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ── ETAPA 3 – Perfil pessoal ── -->
+        <div class="step" id="step-3">
+          <div class="step-header">
+            <p class="step-number">Etapa 3 de 5</p>
+            <h2 class="step-title">Seu perfil pessoal</h2>
+            <p class="step-subtitle">Informações para montar a proposta ideal.</p>
+          </div>
+
+          <div class="field-group">
+            <div class="field-row">
+              <div>
+                <label for="nome">Nome<span class="req">*</span></label>
+                <input type="text" id="nome" placeholder="Seu nome completo" />
+              </div>
+              <div>
+                <label for="idade">Idade</label>
+                <input type="number" id="idade" placeholder="Ex: 32" min="18" max="99" />
+              </div>
+            </div>
+          </div>
+
+          <p class="section-label">Situação profissional</p>
+          <div class="option-grid cols-3" style="margin-bottom:24px">
+            <div class="option-card" data-group="profissao" data-value="clt">
+              <span class="option-icon">💼</span>
+              <span class="option-label">CLT</span>
+            </div>
+            <div class="option-card" data-group="profissao" data-value="mei">
+              <span class="option-icon">🛠️</span>
+              <span class="option-label">MEI / Autônomo</span>
+            </div>
+            <div class="option-card" data-group="profissao" data-value="pj">
+              <span class="option-icon">🏢</span>
+              <span class="option-label">Empresário / PJ</span>
+            </div>
+            <div class="option-card" data-group="profissao" data-value="servidor">
+              <span class="option-icon">🏛️</span>
+              <span class="option-label">Servidor público</span>
+            </div>
+            <div class="option-card" data-group="profissao" data-value="aposentado">
+              <span class="option-icon">🌅</span>
+              <span class="option-label">Aposentado</span>
+            </div>
+            <div class="option-card" data-group="profissao" data-value="outro">
+              <span class="option-icon">📋</span>
+              <span class="option-label">Outro</span>
+            </div>
+          </div>
+
+          <p class="section-label">Já possui consórcio ou financiamento ativo?</p>
+          <div class="option-grid cols-2">
+            <div class="option-card inline" data-group="consorcio_ativo" data-value="sim">
+              <span class="option-icon">✅</span>
+              <span class="option-label">Sim</span>
+            </div>
+            <div class="option-card inline" data-group="consorcio_ativo" data-value="nao">
+              <span class="option-icon">❌</span>
+              <span class="option-label">Não</span>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <button class="btn-back" onclick="prevStep(3)">
+              <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+              Voltar
+            </button>
+            <button class="btn-next" onclick="nextStep(3)">
+              Próximo
+              <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ── ETAPA 4 – Perfil financeiro ── -->
+        <div class="step" id="step-4">
+          <div class="step-header">
+            <p class="step-number">Etapa 4 de 5</p>
+            <h2 class="step-title">Seu perfil financeiro</h2>
+            <p class="step-subtitle">Garante que a proposta caiba no seu orçamento.</p>
+          </div>
+
+          <p class="section-label">Renda bruta mensal familiar</p>
+          <div class="option-grid cols-2" style="margin-bottom:28px">
+            <div class="option-card" data-group="renda" data-value="ate5k">
+              <span class="option-label">Até R$ 5.000</span>
+            </div>
+            <div class="option-card" data-group="renda" data-value="5k10k">
+              <span class="option-label">R$ 5k – R$ 10k</span>
+            </div>
+            <div class="option-card" data-group="renda" data-value="10k20k">
+              <span class="option-label">R$ 10k – R$ 20k</span>
+            </div>
+            <div class="option-card" data-group="renda" data-value="acima20k">
+              <span class="option-label">Acima de R$ 20k</span>
+            </div>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span class="slider-label">Parcela mensal que cabe no orçamento</span>
+              <span class="slider-value" id="parcelaVal">R$ 2.000</span>
+            </div>
+            <input type="range" id="parcelaSlider" min="400" max="8000" step="100" value="2000"
+              oninput="updateSlider('parcelaSlider','parcelaVal', formatCurrency)" />
+            <div class="slider-range">
+              <span>R$ 400</span>
+              <span>R$ 8.000</span>
+            </div>
+          </div>
+
+          <p class="section-label">Situação do nome</p>
+          <div class="option-grid cols-2" style="margin-bottom:24px">
+            <div class="option-card inline" data-group="negativacao" data-value="limpo">
+              <span class="option-icon">✨</span>
+              <span class="option-label">Nome limpo</span>
+            </div>
+            <div class="option-card inline" data-group="negativacao" data-value="restricoes">
+              <span class="option-icon">⚠️</span>
+              <span class="option-label">Tenho restrições</span>
+            </div>
+          </div>
+
+          <p class="section-label">Urgência</p>
+          <div class="option-grid cols-2">
+            <div class="option-card" data-group="urgencia" data-value="lance">
+              <span class="option-icon">⚡</span>
+              <span class="option-label">O mais rápido (lance)</span>
+            </div>
+            <div class="option-card" data-group="urgencia" data-value="sorteio">
+              <span class="option-icon">🎲</span>
+              <span class="option-label">Sorteio, sem pressa</span>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <button class="btn-back" onclick="prevStep(4)">
+              <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+              Voltar
+            </button>
+            <button class="btn-next" onclick="nextStep(4)">
+              Próximo
+              <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ── ETAPA 5 – Contato ── -->
+        <div class="step" id="step-5">
+          <div class="step-header">
+            <p class="step-number">Etapa 5 de 5</p>
+            <h2 class="step-title">Como podemos te contatar?</h2>
+            <p class="step-subtitle">Último passo! Prometemos não enviar spam.</p>
+          </div>
+
+          <div class="field-group">
+            <label for="whatsapp">WhatsApp<span class="req">*</span></label>
+            <input type="text" id="whatsapp" placeholder="(11) 99999-9999" maxlength="15" />
+            <span class="error-msg" id="whatsapp-error">Por favor, informe seu WhatsApp.</span>
+          </div>
+
+          <div class="field-group">
+            <label for="email">E-mail <span style="color:var(--text-light);font-weight:400">(opcional)</span></label>
+            <input type="email" id="email" placeholder="seu@email.com" />
+          </div>
+
+          <p class="section-label">Canal preferido de contato</p>
+          <div class="option-grid cols-2" style="margin-bottom:24px">
+            <div class="option-card inline" data-group="canal" data-value="whatsapp">
+              <span class="option-icon">💬</span>
+              <span class="option-label">WhatsApp</span>
+            </div>
+            <div class="option-card inline" data-group="canal" data-value="ligacao">
+              <span class="option-icon">📞</span>
+              <span class="option-label">Ligação</span>
+            </div>
+          </div>
+
+          <p class="section-label">Melhor horário</p>
+          <div class="option-grid cols-4">
+            <div class="option-card" data-group="horario" data-value="manha">
+              <span class="option-icon">🌅</span>
+              <span class="option-label">Manhã</span>
+            </div>
+            <div class="option-card" data-group="horario" data-value="tarde">
+              <span class="option-icon">☀️</span>
+              <span class="option-label">Tarde</span>
+            </div>
+            <div class="option-card" data-group="horario" data-value="noite">
+              <span class="option-icon">🌙</span>
+              <span class="option-label">Noite</span>
+            </div>
+            <div class="option-card" data-group="horario" data-value="qualquer">
+              <span class="option-icon">🕐</span>
+              <span class="option-label">Qualquer</span>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <button class="btn-back" onclick="prevStep(5)">
+              <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+              Voltar
+            </button>
+            <button class="btn-next" onclick="submitForm()" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 16px rgba(16,185,129,0.35);">
+              Enviar proposta
+              <svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /steps-container -->
+
+      <!-- ── TELA DE SUCESSO ── -->
+      <div class="success-screen" id="successScreen">
+        <div class="success-badge">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2 class="success-title">Parabéns! 🎉</h2>
+        <p class="success-text">
+          Recebemos suas informações e um especialista da Porto Vale Consórcio entrará em contato em breve com uma proposta exclusiva para você.
+        </p>
+        <div class="next-steps">
+          <div class="next-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <strong>Análise do seu perfil</strong>
+              <span>Nossa equipe avaliará suas informações e preparará as melhores opções de consórcio.</span>
+            </div>
+          </div>
+          <div class="next-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <strong>Contato personalizado</strong>
+              <span>Você receberá uma mensagem via WhatsApp com uma simulação detalhada e sem compromisso.</span>
+            </div>
+          </div>
+          <div class="next-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <strong>Seu imóvel mais perto</strong>
+              <span>Com a proposta aprovada, iniciamos o processo para que você conquiste o seu imóvel.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /form-card -->
+  </div><!-- /form-wrapper -->
+
+  <script>
+    // ─── Open form ──────────────────────────────────────────────────
+    function openForm() {
+      const wrapper = document.getElementById('formWrapper');
+      const cta = document.getElementById('btnCTA');
+      cta.style.display = 'none';
+      wrapper.style.display = 'flex';
+      wrapper.classList.add('open');
+      wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ─── State ──────────────────────────────────────────────────────
+    let currentStep = 1;
+    const totalSteps = 5;
+    const formData = {};
+
+    // ─── Progress ───────────────────────────────────────────────────
+    function updateProgress(step) {
+      const pct = ((step - 1) / totalSteps) * 100 + (100 / totalSteps) * 0.5;
+      document.getElementById('progressFill').style.width = Math.min(pct, 95) + '%';
+
+      document.querySelectorAll('.progress-label').forEach(el => {
+        const s = parseInt(el.dataset.step);
+        el.classList.remove('active', 'done');
+        if (s === step) el.classList.add('active');
+        else if (s < step) el.classList.add('done');
+      });
+    }
+
+    // ─── Navigation ─────────────────────────────────────────────────
+    function goToStep(target, direction) {
+      const current = document.getElementById(`step-${currentStep}`);
+      current.style.animation = '';
+      current.classList.remove('active', 'from-back', 'slide-out');
+
+      currentStep = target;
+      const next = document.getElementById(`step-${currentStep}`);
+      next.style.animation = '';
+      next.classList.remove('from-back');
+      if (direction === 'back') next.classList.add('from-back');
+      next.classList.add('active');
+      updateProgress(currentStep);
+      document.getElementById('formCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function nextStep(from) {
+      if (!validateStep(from)) return;
+      goToStep(from + 1, 'forward');
+    }
+
+    function prevStep(from) {
+      goToStep(from - 1, 'back');
+    }
+
+    // ─── Validation ─────────────────────────────────────────────────
+    function validateStep(step) {
+      if (step === 5) {
+        const wpp = document.getElementById('whatsapp');
+        const err = document.getElementById('whatsapp-error');
+        const raw = wpp.value.replace(/\D/g, '');
+        if (raw.length < 10) {
+          wpp.classList.add('error');
+          err.classList.add('visible');
+          wpp.focus();
+          return false;
+        }
+        wpp.classList.remove('error');
+        err.classList.remove('visible');
+      }
+      return true;
+    }
+
+    // ─── Submit ─────────────────────────────────────────────────────
+    function submitForm() {
+      if (!validateStep(5)) return;
+
+      // Collect remaining data
+      formData.whatsapp = document.getElementById('whatsapp').value;
+      formData.email    = document.getElementById('email').value;
+      formData.nome     = document.getElementById('nome').value;
+      formData.idade    = document.getElementById('idade').value;
+      formData.estado   = document.getElementById('estado').value;
+      formData.credito  = document.getElementById('creditoSlider').value;
+      formData.parcela  = document.getElementById('parcelaSlider').value;
+
+      console.log('Form data:', formData);
+
+      // Show success
+      document.getElementById('stepsContainer').style.display = 'none';
+      document.getElementById('progressWrap').style.display = 'none';
+      const success = document.getElementById('successScreen');
+      success.classList.add('active');
+      document.getElementById('formCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ─── Option cards ────────────────────────────────────────────────
+    document.querySelectorAll('.option-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const group = card.dataset.group;
+        document.querySelectorAll(`.option-card[data-group="${group}"]`)
+          .forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        formData[group] = card.dataset.value;
+      });
+    });
+
+    // ─── Sliders ─────────────────────────────────────────────────────
+    function formatCurrency(val) {
+      const n = parseInt(val);
+      if (n >= 1000000) return 'R$ ' + (n / 1000000).toFixed(1).replace('.', ',') + ' mi';
+      if (n >= 1000)    return 'R$ ' + (n / 1000).toFixed(0) + ' mil';
+      return 'R$ ' + n.toLocaleString('pt-BR');
+    }
+
+    function updateSlider(sliderId, displayId, formatter) {
+      const val = document.getElementById(sliderId).value;
+      document.getElementById(displayId).textContent = formatter(val);
+      const slider = document.getElementById(sliderId);
+      const pct = (val - slider.min) / (slider.max - slider.min) * 100;
+      slider.style.background = `linear-gradient(to right, #16a7e0 ${pct}%, #d1d5db ${pct}%)`;
+    }
+
+    // Init sliders
+    updateSlider('creditoSlider', 'creditoVal', formatCurrency);
+    updateSlider('parcelaSlider', 'parcelaVal', formatCurrency);
+
+    // ─── Phone mask ───────────────────────────────────────────────────
+    document.getElementById('whatsapp').addEventListener('input', function(e) {
+      let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+      if (v.length <= 10) {
+        v = v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+      } else {
+        v = v.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+      }
+      e.target.value = v.replace(/-$/, '');
+    });
+
+    document.getElementById('whatsapp').addEventListener('focus', function() {
+      this.classList.remove('error');
+      document.getElementById('whatsapp-error').classList.remove('visible');
+    });
+
+    // ─── Click on progress labels to jump to any step ────────────────
+    document.querySelectorAll('.progress-label').forEach(label => {
+      label.addEventListener('click', () => {
+        const target = parseInt(label.dataset.step);
+        if (target === currentStep) return;
+        const direction = target > currentStep ? 'forward' : 'back';
+        goToStep(target, direction);
+      });
+    });
+
+    // Init progress
+    updateProgress(1);
+  </script>
+</body>
+</html>
