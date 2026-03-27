@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Porto Vale Consórcio — Realize seu imóvel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f5f2ec;
+      --card-bg:   #fffefb;
+      --accent:    #1e9fd4;
+      --accent-dk: #1480ac;
+      --text-dark: #1a1714;
+      --text-mid:  #5a5048;
+      --text-light:#a89f96;
+      --border:    #e0d8cf;
+      --success:   #10b981;
+      --radius:    14px;
+      --trans:     0.25s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+
+    /* ─── Header ─────────────────────────────────────────────────── */
+    header {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 48px;
+      background: #fffefb;
+      border-bottom: 1px solid #e8e2d8;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo img {
+      height: 48px;
+      width: auto;
+      display: block;
+    }
+
+    /* ─── Aurora keyframes ───────────────────────────────────────── */
+    @keyframes aurora-1 {
+      0%   { transform: translate(0%, 0%) scale(1); }
+      25%  { transform: translate(20%, -20%) scale(1.2); }
+      50%  { transform: translate(-20%, 20%) scale(0.8); }
+      75%  { transform: translate(10%, -10%) scale(1.1); }
+      100% { transform: translate(0%, 0%) scale(1); }
+    }
+    @keyframes aurora-2 {
+      0%   { transform: translate(0%, 0%) scale(1); }
+      25%  { transform: translate(-20%, 20%) scale(1.1); }
+      50%  { transform: translate(20%, -20%) scale(0.9); }
+      75%  { transform: translate(-10%, 10%) scale(1.2); }
+      100% { transform: translate(0%, 0%) scale(1); }
+    }
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Hero ───────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px;
+      min-height: calc(100vh - 85px);
+      background: url('imagem/herofundo.png') center center / cover no-repeat;
+    }
+
+    .hero-img-title {
+      max-width: 560px;
+      width: 90%;
+      display: block;
+      margin-bottom: 80px;
+      animation: heroFadeUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.2s both;
+    }
+
+    .hero-img-condition {
+      max-width: 1140px;
+      width: 100%;
+      display: block;
+      margin-bottom: 100px;
+      animation: heroFadeUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.38s both;
+    }
+
+    .hero-legal {
+      margin-top: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.42);
+      letter-spacing: 0.01em;
+      animation: heroFadeUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.78s both;
+    }
+
+    /* Aurora blobs */
+    .hero::before,
+    .hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hero::before {
+      width: 620px; height: 620px;
+      background: radial-gradient(circle, rgba(0,229,255,0.30), transparent 70%);
+      top: -20%; left: 10%;
+      animation: aurora-1 12s ease-in-out infinite;
+    }
+    .hero::after {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,51,180,0.35), transparent 70%);
+      bottom: -10%; right: 8%;
+      animation: aurora-2 10s ease-in-out infinite;
+    }
+    .hero-grain {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: -0.02em;
+      font-size: clamp(44px, 7vw, 78px);
+      line-height: 1.05;
+      white-space: nowrap;
+      margin-bottom: 22px;
+      color: #ffffff;
+      animation: heroFadeUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.2s both;
+    }
+
+    .hero-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(15px, 1.8vw, 17px);
+      color: rgba(255,255,255,0.75);
+      max-width: 620px;
+      line-height: 1.75;
+      margin-bottom: 44px;
+      font-weight: 400;
+      animation: heroFadeUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.42s both;
+    }
+
+    .btn-cta-wrap {
+      /* animação movida para .rainbow-ring */
+    }
+
+    .btn-cta {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      overflow: hidden;
+      padding: 22px 52px;
+      background: transparent;
+      border: 1.5px solid rgba(26,23,20,0.35);
+      border-radius: 100px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition:
+        border-color 600ms cubic-bezier(0.23,1,0.32,1),
+        color 600ms cubic-bezier(0.23,1,0.32,1),
+        border-radius 600ms cubic-bezier(0.23,1,0.32,1);
+    }
+
+    .btn-cta:hover {
+      border-color: transparent;
+      color: #fff;
+      border-radius: 12px;
+    }
+
+    .btn-cta:active { transform: scale(0.97); }
+
+    /* ─── Rainbow ring wrapper ────────────────────────────────────── */
+    .rainbow-ring {
+      position: relative;
+      display: inline-block;
+      border-radius: 100px;
+      padding: 2px;
+      background: transparent;
+      animation: heroFadeUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.62s both;
+      transition: border-radius 600ms cubic-bezier(0.23,1,0.32,1);
+    }
+
+    .rainbow-ring::before,
+    .rainbow-ring::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 100px;
+      transition: border-radius 600ms cubic-bezier(0.23,1,0.32,1);
+      background: linear-gradient(
+        45deg,
+        #00e5ff, #00b8d4, #80f4ff,
+        #0097a7, #00e5ff, #40e0f0,
+        #b2f8ff, #00c8e0, #00e5ff, #0097a7
+      );
+      background-size: 400%;
+      animation: blue-ring 25s linear infinite;
+      transition: border-radius 600ms cubic-bezier(0.23,1,0.32,1);
+    }
+
+    .rainbow-ring::after {
+      filter: blur(14px);
+      opacity: 0.55;
+      z-index: -1;
+    }
+
+    .rainbow-ring:has(.btn-cta:hover),
+    .rainbow-ring:has(.btn-cta:hover)::before,
+    .rainbow-ring:has(.btn-cta:hover)::after {
+      border-radius: 12px;
+    }
+
+    @keyframes blue-ring {
+      0%   { background-position: 0% 0%; }
+      50%  { background-position: 400% 0%; }
+      100% { background-position: 0% 0%; }
+    }
+
+    .rainbow-ring .btn-cta {
+      position: relative;
+      z-index: 1;
+      background: #ffffff;
+      border-color: transparent;
+      color: #212b43;
+    }
+
+    .rainbow-ring .btn-cta:hover {
+      border-color: transparent;
+      background: transparent;
+      color: #00e5ff;
+    }
+
+    /* Seta esquerda: entra vindo da esquerda */
+    .btn-cta .arr-left {
+      position: absolute;
+      width: 16px; height: 16px;
+      left: -30%;
+      fill: none;
+      stroke: #212b43;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      z-index: 9;
+      transition: left 800ms cubic-bezier(0.34,1.56,0.64,1), stroke 400ms;
+    }
+
+    .btn-cta:hover .arr-left {
+      left: 18px;
+      stroke: #00e5ff;
+    }
+
+    /* Texto: desloca levemente para direita */
+    .btn-cta .cta-text {
+      position: relative;
+      z-index: 1;
+      transform: translateX(-10px);
+      transition: transform 800ms ease-out;
+    }
+
+    .btn-cta:hover .cta-text {
+      transform: translateX(10px);
+    }
+
+    /* Círculo: expande para preencher o botão */
+    .btn-cta .cta-circle {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 14px; height: 14px;
+      background: #212b43;
+      border-radius: 50%;
+      opacity: 0;
+      transition:
+        width 800ms cubic-bezier(0.19,1,0.22,1),
+        height 800ms cubic-bezier(0.19,1,0.22,1),
+        opacity 800ms cubic-bezier(0.19,1,0.22,1);
+      z-index: 0;
+    }
+
+    .btn-cta:hover .cta-circle {
+      width: 600px;
+      height: 600px;
+      opacity: 1;
+    }
+
+    /* Seta direita: sai para a direita */
+    .btn-cta .arr-right {
+      position: absolute;
+      width: 16px; height: 16px;
+      right: 18px;
+      fill: none;
+      stroke: #212b43;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      z-index: 9;
+      transition: right 800ms cubic-bezier(0.34,1.56,0.64,1), stroke 400ms;
+    }
+
+    .btn-cta:hover .arr-right {
+      right: -30%;
+      stroke: #00e5ff;
+    }
+
+    .btn-cta svg {
+      width: 20px; height: 20px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ─── Form modal overlay ─────────────────────────────────────── */
+    .form-wrapper {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 24px;
+      background: rgba(10, 8, 6, 0);
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      transition: background 0.35s ease, backdrop-filter 0.35s ease;
+      overflow-y: auto;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .form-wrapper.open {
+      background: rgba(10, 8, 6, 0.62);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      pointer-events: all;
+      opacity: 1;
+      transition: background 0.35s ease, backdrop-filter 0.35s ease, opacity 0.01s;
+    }
+
+    .form-card {
+      width: 100%;
+      max-width: 640px;
+      background: var(--card-bg);
+      border-radius: 24px;
+      box-shadow:
+        0 24px 72px rgba(10,8,6,0.22),
+        0 6px 20px rgba(10,8,6,0.10);
+      overflow: hidden;
+      transform: translateY(28px) scale(0.97);
+      opacity: 0;
+      transition: transform 0.38s cubic-bezier(0.34, 1.26, 0.64, 1), opacity 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .form-wrapper.open .form-card {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    /* Modal inner wrapper (positions close button relative to card) */
+    .modal-inner {
+      position: relative;
+      width: 100%;
+      max-width: 640px;
+      flex-shrink: 0;
+    }
+
+    /* Close button */
+    .modal-close {
+      position: absolute;
+      top: -42px;
+      right: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid rgba(26,23,20,0.10);
+      background: var(--card-bg);
+      color: var(--text-light);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+      transition: background 0.15s, color 0.15s;
+      box-shadow: 0 1px 4px rgba(26,23,20,0.07);
+    }
+
+    .modal-close:hover {
+      background: var(--bg);
+      color: var(--text-dark);
+    }
+
+    .modal-close svg {
+      width: 13px;
+      height: 13px;
+      stroke: currentColor;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      fill: none;
+    }
+
+    /* Submit button hover contrast fix */
+    .btn-submit:hover { color: #fff !important; }
+    .btn-submit:hover .fn-arr-left,
+    .btn-submit:hover .fn-arr-right { stroke: #fff !important; }
+
+    /* ─── Progress bar ───────────────────────────────────────────── */
+    .progress-bar-wrap {
+      background: #f8f5f0;
+      border-bottom: 1px solid #e8e1d8;
+      padding: 28px 32px 0;
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .progress-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      transition: color var(--trans);
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 100px;
+      background: transparent;
+      transition: color var(--trans), background var(--trans);
+    }
+
+    /* Ícone da etapa */
+    .pl-icon {
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+      max-width: 16px;
+      overflow: hidden;
+      opacity: 1;
+      transition: max-width 250ms ease, opacity 250ms ease;
+    }
+
+    .pl-icon svg {
+      width: 13px; height: 13px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    /* Texto — expandido apenas na ativa */
+    .progress-label .pl-text {
+      display: inline-block;
+      max-width: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      opacity: 0;
+      transition: max-width 300ms ease, opacity 250ms ease;
+    }
+
+    .progress-label.active .pl-text {
+      max-width: 80px;
+      opacity: 1;
+    }
+
+    /* Check — aparece quando done */
+    .progress-label .pl-check {
+      display: inline-flex;
+      align-items: center;
+      max-width: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-width 300ms ease 80ms, opacity 280ms ease 80ms;
+    }
+
+    .progress-label .pl-check svg {
+      width: 13px; height: 13px;
+      stroke: #10b981;
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    /* Done: esconde ícone e texto, mostra check */
+    .progress-label.done .pl-icon {
+      max-width: 0;
+      opacity: 0;
+    }
+
+    .progress-label.done .pl-check {
+      max-width: 18px;
+      opacity: 1;
+    }
+
+    .progress-label:hover {
+      color: var(--accent);
+    }
+
+    .progress-label.active {
+      color: var(--accent);
+      background: rgba(30,159,212,0.08);
+    }
+
+    .progress-label.done {
+      color: var(--success);
+    }
+
+    .progress-track {
+      height: 5px;
+      background: #d1d5db;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      overflow: visible;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--accent), #5ecef5);
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px; height: 12px;
+      background: #fff;
+      border: 3px solid var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(22,167,224,0.2);
+    }
+
+    /* ─── Step container ─────────────────────────────────────────── */
+    .steps-container {
+      padding: 32px 32px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step {
+      display: none;
+      animation: none;
+    }
+
+    .step.active {
+      display: block;
+      animation: slideIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .step.slide-out {
+      animation: slideOut 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(28px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideOut {
+      from { opacity: 1; transform: translateX(0); }
+      to   { opacity: 0; transform: translateX(-28px); }
+    }
+
+    @keyframes slideInBack {
+      from { opacity: 0; transform: translateX(-28px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .step.active.from-back {
+      animation: slideInBack 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ─── Step header ─────────────────────────────────────────────── */
+    .step-header {
+      margin-bottom: 28px;
+    }
+
+    .step-number {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .step-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+
+    .step-subtitle {
+      font-size: 14px;
+      color: var(--text-mid);
+      margin-top: 6px;
+      font-weight: 400;
+    }
+
+    /* ─── Option cards ────────────────────────────────────────────── */
+    .option-grid {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .option-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+    .option-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .option-grid.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+    .option-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 12px;
+      background: #fff;
+      border: 2px solid #e5e7eb;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: border-color var(--trans), background var(--trans), transform var(--trans), box-shadow var(--trans);
+      text-align: center;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .option-card:hover {
+      border-color: var(--accent);
+      background: rgba(22,167,224,0.04);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(22,167,224,0.12);
+    }
+
+    .option-card.selected {
+      border-color: var(--accent);
+      background: rgba(22,167,224,0.07);
+      box-shadow: 0 4px 16px rgba(22,167,224,0.18);
+      transform: translateY(-2px);
+    }
+
+    .option-card.selected::after {
+      content: '';
+      position: absolute;
+      top: 8px; right: 8px;
+      width: 18px; height: 18px;
+      background: var(--accent);
+      border-radius: 50%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-5' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+      background-size: 10px 10px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .option-icon {
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-mid);
+      flex-shrink: 0;
+    }
+
+    .option-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .option-card.selected .option-icon { color: var(--accent); }
+
+    .option-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.3;
+    }
+
+    .option-card.selected .option-label {
+      color: var(--accent-dk);
+    }
+
+    /* ─── Two-option (yes/no) ─────────────────────────────────────── */
+    .option-card.inline {
+      flex-direction: row;
+      padding: 13px 18px;
+      gap: 12px;
+      justify-content: flex-start;
+    }
+
+    .option-card.inline .option-icon { width: 20px; height: 20px; }
+
+    /* ─── Slider ─────────────────────────────────────────────────── */
+    .slider-group {
+      margin-bottom: 24px;
+    }
+
+    .slider-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .slider-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .slider-value {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .slider-range {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-light);
+      margin-top: 6px;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 5px;
+      border-radius: 100px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: #fff;
+      border: 3px solid var(--accent);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(22,167,224,0.3);
+      transition: transform var(--trans), box-shadow var(--trans);
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover,
+    input[type="range"]:active::-webkit-slider-thumb {
+      transform: scale(1.2);
+      box-shadow: 0 2px 16px rgba(22,167,224,0.45);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: #fff;
+      border: 3px solid var(--accent);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(22,167,224,0.3);
+    }
+
+    /* ─── Form fields ─────────────────────────────────────────────── */
+    .field-group {
+      margin-bottom: 20px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 7px;
+    }
+
+    label span.req {
+      color: var(--accent);
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      background: #fff;
+      border: 1.5px solid #ddd6cc;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color var(--trans), box-shadow var(--trans);
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(22,167,224,0.12);
+    }
+
+    input::placeholder { color: var(--text-light); }
+
+    .select-wrap {
+      position: relative;
+    }
+
+    .select-wrap::after {
+      content: '';
+      position: absolute;
+      right: 14px; top: 50%;
+      transform: translateY(-50%);
+      width: 0; height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid var(--text-mid);
+      pointer-events: none;
+    }
+
+    .select-wrap select {
+      padding-right: 38px;
+      cursor: pointer;
+    }
+
+    /* ─── Section label ───────────────────────────────────────────── */
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-mid);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    /* ─── Navigation buttons ─────────────────────────────────────── */
+    .form-nav {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    /* ─── Btn Back — ghost ───────────────────────────────────────── */
+    .btn-back {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 14px 10px;
+      background: transparent;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: color var(--trans);
+      white-space: nowrap;
+    }
+
+    .btn-back:hover { color: var(--text-mid); }
+
+    .btn-back svg {
+      width: 16px; height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    /* ─── Btn Next — FlowButton ──────────────────────────────────── */
+    .btn-next {
+      position: relative;
+      flex: 0 0 auto;
+      margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 13px 32px;
+      background: #212b43;
+      border: 1.5px solid transparent;
+      border-radius: 100px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #00ccff;
+      cursor: pointer;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      transition:
+        border-color 600ms cubic-bezier(0.23,1,0.32,1),
+        color 600ms cubic-bezier(0.23,1,0.32,1),
+        border-radius 600ms cubic-bezier(0.23,1,0.32,1);
+    }
+
+    .btn-next:hover {
+      border-color: transparent;
+      color: #212b43;
+      border-radius: 12px;
+    }
+
+    .btn-next:active { transform: scale(0.97); }
+
+    .btn-next .fn-arr-left {
+      position: absolute;
+      width: 16px; height: 16px;
+      left: -30%;
+      fill: none;
+      stroke: #00ccff;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      z-index: 9;
+      transition: left 800ms cubic-bezier(0.34,1.56,0.64,1), stroke 400ms;
+    }
+
+    .btn-next:hover .fn-arr-left { left: 18px; stroke: #212b43; }
+
+    .btn-next .fn-text {
+      position: relative;
+      z-index: 1;
+      transform: translateX(-10px);
+      transition: transform 800ms ease-out;
+    }
+
+    .btn-next:hover .fn-text { transform: translateX(10px); }
+
+    .btn-next .fn-circle {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 14px; height: 14px;
+      background: #ffffff;
+      border-radius: 50%;
+      opacity: 0;
+      z-index: 0;
+      transition:
+        width 800ms cubic-bezier(0.19,1,0.22,1),
+        height 800ms cubic-bezier(0.19,1,0.22,1),
+        opacity 800ms cubic-bezier(0.19,1,0.22,1);
+    }
+
+    .btn-next:hover .fn-circle { width: 280px; height: 280px; opacity: 1; }
+
+    .btn-next .fn-arr-right {
+      position: absolute;
+      width: 16px; height: 16px;
+      right: 18px;
+      fill: none;
+      stroke: #00ccff;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      z-index: 9;
+      transition: right 800ms cubic-bezier(0.34,1.56,0.64,1), stroke 400ms;
+    }
+
+    .btn-next:hover .fn-arr-right { right: -30%; stroke: #212b43; }
+
+    /* ─── Error message ───────────────────────────────────────────── */
+    .error-msg {
+      display: none;
+      font-size: 12px;
+      color: #ef4444;
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    .error-msg.visible { display: block; }
+
+    input.error { border-color: #ef4444 !important; }
+
+    /* ─── Success screen ─────────────────────────────────────────── */
+    .success-screen {
+      display: none;
+      padding: 48px 32px;
+      text-align: center;
+    }
+
+    .success-screen.active { display: block; }
+
+    .success-badge {
+      width: 80px; height: 80px;
+      background: linear-gradient(135deg, var(--success), #059669);
+      border-radius: 50%;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(16,185,129,0.35);
+      animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    .success-badge svg {
+      width: 38px; height: 38px;
+      stroke: #fff;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .success-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .success-text {
+      font-size: 15px;
+      color: var(--text-mid);
+      max-width: 380px;
+      margin: 0 auto 32px;
+      line-height: 1.65;
+    }
+
+    .next-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .next-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      animation: slideIn 0.4s ease both;
+    }
+
+    .next-step:nth-child(1) { animation-delay: 0.2s; }
+    .next-step:nth-child(2) { animation-delay: 0.35s; }
+    .next-step:nth-child(3) { animation-delay: 0.5s; }
+
+    .step-num {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dk));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .step-content strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 3px;
+    }
+
+    .step-content span {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+
+    /* ─── Icon-only card + tooltip ──────────────────────────────── */
+    .option-card.icon-only {
+      padding: 14px 10px;
+      position: relative;
+    }
+
+    .option-card.icon-only::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      background: #1a1714;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+      padding: 5px 10px;
+      border-radius: 6px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      z-index: 100;
+    }
+
+    .option-card.icon-only:hover::after {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ─── Modal light-gray theme ─────────────────────────────────── */
+    .form-card { background: #ebebed; }
+
+    .form-card .progress-bar-wrap {
+      background: #e2e2e5;
+      border-bottom-color: rgba(0,0,0,0.06);
+    }
+
+    .form-card .progress-fill::after { background: #ebebed; }
+
+    /* Cards — branco sem borda; hover/selected ganham borda azul */
+    .form-card .option-card {
+      background: #fff;
+      border: 2px solid transparent;
+      box-shadow: none;
+    }
+    .form-card .option-card:hover {
+      background: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(30,159,212,0.12);
+      transform: none;
+    }
+    .form-card .option-card.selected {
+      background: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(30,159,212,0.15);
+      transform: none;
+    }
+
+    /* Inputs — branco sem borda; foco ganha borda azul */
+    .form-card input[type="text"],
+    .form-card input[type="email"],
+    .form-card input[type="number"],
+    .form-card select {
+      background: #fff;
+      border: 2px solid transparent;
+    }
+    .form-card input:focus,
+    .form-card select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(30,159,212,0.12);
+    }
+
+    /* Slider track */
+    .form-card input[type="range"] { background: #d4d4d7; }
+
+    /* Next-step cards na tela de sucesso */
+    .form-card .next-step {
+      background: #fff;
+      border: none;
+      box-shadow: none;
+    }
+
+    /* ─── Responsivo ─────────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      header { padding: 16px 20px; }
+      .header-badge { display: none; }
+      .hero { padding: 44px 20px 0; }
+      .hero-stats { gap: 20px; }
+      .stat-value { font-size: 22px; }
+      .steps-container { padding: 24px 20px 20px; }
+      .progress-bar-wrap { padding: 22px 20px 0; }
+      .option-grid.cols-4 { grid-template-columns: 1fr 1fr; }
+      .option-grid.cols-3 { grid-template-columns: 1fr 1fr; }
+      .field-row { grid-template-columns: 1fr; }
+      .btn-back { padding: 14px 16px; }
+      .success-screen { padding: 36px 20px; }
+    }
+
+    @media (max-width: 400px) {
+      .option-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── HEADER ──────────────────────────────────────────────────── -->
+  <header>
+    <a href="#" class="logo">
+      <img src="imagem/logo-portovale.png" alt="Porto Vale Consórcio" />
+    </a>
+  </header>
+
+  <!-- ─── HERO ────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-grain"></div>
+    <div class="hero-content" id="heroContent">
+      <img class="hero-img-title" src="imagem/tíulo-hero.png" alt="" />
+      <img class="hero-img-condition" src="imagem/condicao.png" alt="" />
+      <div class="btn-cta-wrap">
+        <div class="rainbow-ring">
+          <button class="btn-cta" id="btnCTA" onclick="openForm()">
+            <svg class="arr-left" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            <span class="cta-text">Quero conquistar meu imóvel</span>
+            <span class="cta-circle"></span>
+            <svg class="arr-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+      <p class="hero-legal">*Consulte condições.</p>
+    </div>
+  </section><!-- /hero -->
+
+  <div class="form-wrapper" id="formWrapper">
+    <div class="modal-inner">
+      <button class="modal-close" onclick="closeForm()" title="Fechar">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="form-card" id="formCard">
+
+      <!-- Progress bar -->
+      <div class="progress-bar-wrap" id="progressWrap">
+        <div class="progress-labels" id="progressLabels">
+          <span class="progress-label active" data-step="1">
+            <span class="pl-icon"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>
+            <span class="pl-text">Objetivo</span>
+            <span class="pl-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </span>
+          <span class="progress-label" data-step="2">
+            <span class="pl-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+            <span class="pl-text">Imóvel</span>
+            <span class="pl-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </span>
+          <span class="progress-label" data-step="3">
+            <span class="pl-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+            <span class="pl-text">Perfil</span>
+            <span class="pl-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </span>
+          <span class="progress-label" data-step="4">
+            <span class="pl-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></span>
+            <span class="pl-text">Financeiro</span>
+            <span class="pl-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </span>
+          <span class="progress-label" data-step="5">
+            <span class="pl-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.02 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.06 6.06l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></span>
+            <span class="pl-text">Contato</span>
+            <span class="pl-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill" style="width: 10%"></div>
+        </div>
+      </div>
+
+      <!-- Steps -->
+      <div class="steps-container" id="stepsContainer">
+
+        <!-- ── ETAPA 1 – Objetivo ── -->
+        <div class="step active" id="step-1">
+          <div class="step-header">
+            <h2 class="step-title">Qual é o seu objetivo com o consórcio?</h2>
+            <p class="step-subtitle">Selecione o tipo de imóvel desejado.</p>
+          </div>
+
+          <div class="option-grid cols-3">
+            <div class="option-card" data-group="objetivo" data-value="compra">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+              <span class="option-label">Compra de imóvel</span>
+            </div>
+            <div class="option-card" data-group="objetivo" data-value="terreno">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg></span>
+              <span class="option-label">Terreno</span>
+            </div>
+            <div class="option-card" data-group="objetivo" data-value="construcao">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></span>
+              <span class="option-label">Construção e reforma</span>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <button class="btn-next" onclick="nextStep(1)">
+              <svg class="fn-arr-left" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              <span class="fn-text">Próximo</span>
+              <span class="fn-circle"></span>
+              <svg class="fn-arr-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ── ETAPA 2 – Adaptativa ── -->
+        <div class="step" id="step-2">
+          <div class="step-header">
+            <h2 class="step-title" id="step2-title">Sobre o imóvel</h2>
+            <p class="step-subtitle" id="step2-subtitle">Informe o tipo, valor e localização.</p>
+          </div>
+
+          <!-- PANEL: Compra de imóvel -->
+          <div id="panel-compra" class="step2-panel">
+            <p class="section-label">Tipo de imóvel</p>
+            <div class="option-grid cols-2" style="margin-bottom:28px">
+              <div class="option-card" data-group="tipo_compra" data-value="apartamento">
+                <span class="option-icon"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="1"/><path d="M9 22v-4h6v4"/><rect x="8" y="6" width="2" height="2" rx="0.5"/><rect x="14" y="6" width="2" height="2" rx="0.5"/><rect x="8" y="11" width="2" height="2" rx="0.5"/><rect x="14" y="11" width="2" height="2" rx="0.5"/></svg></span>
+                <span class="option-label">Apartamento</span>
+              </div>
+              <div class="option-card" data-group="tipo_compra" data-value="casa">
+                <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+                <span class="option-label">Casa</span>
+              </div>
+              <div class="option-card" data-group="tipo_compra" data-value="condominio">
+                <span class="option-icon"><svg viewBox="0 0 24 24"><line x1="1" y1="22" x2="23" y2="22"/><path d="M8 22V8l7-5 7 5v14"/><path d="M3 22V13l5-4"/><rect x="11" y="15" width="4" height="7"/></svg></span>
+                <span class="option-label">Condomínio</span>
+              </div>
+              <div class="option-card" data-group="tipo_compra" data-value="comercial">
+                <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M3 9l1-5h16l1 5"/><path d="M3 9a2 2 0 002 2 2 2 0 002-2 2 2 0 002 2 2 2 0 002-2 2 2 0 002 2 2 2 0 002-2"/><path d="M5 11v8a1 1 0 001 1h12a1 1 0 001-1v-8"/><rect x="9" y="15" width="6" height="5"/></svg></span>
+                <span class="option-label">Comercial</span>
+              </div>
+            </div>
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <span class="slider-label">Valor da carta de crédito</span>
+                <span class="slider-value" id="creditoCompraVal">R$ 350 mil</span>
+              </div>
+              <input type="range" id="creditoCompraSlider" min="100000" max="1500000" step="10000" value="350000"
+                oninput="updateSlider('creditoCompraSlider','creditoCompraVal', formatCurrency)" />
+              <div class="slider-range"><span>R$ 100 mil</span><span>R$ 1,5 milhão</span></div>
+            </div>
+            <div class="field-group">
+              <label for="estadoCompra">Estado onde deseja o imóvel</label>
+              <div class="select-wrap"><select id="estadoCompra">
+                <option value="">Selecione o estado...</option>
+                <option>AC</option><option>AL</option><option>AM</option><option>AP</option>
+                <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+                <option>GO</option><option>MA</option><option>MG</option><option>MS</option>
+                <option>MT</option><option>PA</option><option>PB</option><option>PE</option>
+                <option>PI</option><option>PR</option><option>RJ</option><option>RN</option>
+                <option>RO</option><option>RR</option><option>RS</option><option>SC</option>
+                <option>SE</option><option>SP</option><option>TO</option>
+              </select></div>
+            </div>
+          </div><!-- /panel-compra -->
+
+          <!-- PANEL: Terreno -->
+          <div id="panel-terreno" class="step2-panel" style="display:none">
+            <p class="section-label">Finalidade do terreno</p>
+            <div class="option-grid cols-2" style="margin-bottom:28px">
+              <div class="option-card" data-group="tipo_terreno" data-value="residencial">
+                <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+                <span class="option-label">Residencial</span>
+              </div>
+              <div class="option-card" data-group="tipo_terreno" data-value="comercial">
+                <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M3 9l1-5h16l1 5"/><path d="M3 9a2 2 0 002 2 2 2 0 002-2 2 2 0 002 2 2 2 0 002-2 2 2 0 002 2 2 2 0 002-2"/><path d="M5 11v8a1 1 0 001 1h12a1 1 0 001-1v-8"/><rect x="9" y="15" width="6" height="5"/></svg></span>
+                <span class="option-label">Comercial</span>
+              </div>
+              <div class="option-card" data-group="tipo_terreno" data-value="rural">
+                <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M3 17l4-8 4 5 3-3 4 6"/><path d="M21 21H3"/><circle cx="18" cy="9" r="3"/></svg></span>
+                <span class="option-label">Rural / Agrícola</span>
+              </div>
+              <div class="option-card" data-group="tipo_terreno" data-value="investimento">
+                <span class="option-icon"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
+                <span class="option-label">Investimento</span>
+              </div>
+            </div>
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <span class="slider-label">Valor da carta de crédito</span>
+                <span class="slider-value" id="creditoTerrenoVal">R$ 200 mil</span>
+              </div>
+              <input type="range" id="creditoTerrenoSlider" min="50000" max="800000" step="10000" value="200000"
+                oninput="updateSlider('creditoTerrenoSlider','creditoTerrenoVal', formatCurrency)" />
+              <div class="slider-range"><span>R$ 50 mil</span><span>R$ 800 mil</span></div>
+            </div>
+            <div class="field-group">
+              <label for="estadoTerreno">Estado onde deseja o terreno</label>
+              <div class="select-wrap"><select id="estadoTerreno">
+                <option value="">Selecione o estado...</option>
+                <option>AC</option><option>AL</option><option>AM</option><option>AP</option>
+                <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+                <option>GO</option><option>MA</option><option>MG</option><option>MS</option>
+                <option>MT</option><option>PA</option><option>PB</option><option>PE</option>
+                <option>PI</option><option>PR</option><option>RJ</option><option>RN</option>
+                <option>RO</option><option>RR</option><option>RS</option><option>SC</option>
+                <option>SE</option><option>SP</option><option>TO</option>
+              </select></div>
+            </div>
+          </div><!-- /panel-terreno -->
+
+          <!-- PANEL: Construção e reforma -->
+          <div id="panel-construcao" class="step2-panel" style="display:none">
+            <p class="section-label">O que você precisa?</p>
+            <div class="option-grid cols-2" style="margin-bottom:28px">
+              <div class="option-card" data-group="tipo_obra" data-value="construcao-zero">
+                <span class="option-icon"><svg viewBox="0 0 24 24"><line x1="3" y1="22" x2="21" y2="22"/><path d="M8 22V8l7-5 7 5v14"/><rect x="11" y="15" width="4" height="7"/></svg></span>
+                <span class="option-label">Construção do zero</span>
+              </div>
+              <div class="option-card" data-group="tipo_obra" data-value="reforma-ampliacao">
+                <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></span>
+                <span class="option-label">Reforma / Ampliação</span>
+              </div>
+              <div class="option-card" data-group="tipo_obra" data-value="regularizacao">
+                <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></span>
+                <span class="option-label">Regularização + Reforma</span>
+              </div>
+              <div class="option-card" data-group="tipo_obra" data-value="acabamento">
+                <span class="option-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></span>
+                <span class="option-label">Acabamento</span>
+              </div>
+            </div>
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <span class="slider-label">Valor estimado da obra</span>
+                <span class="slider-value" id="creditoObraVal">R$ 150 mil</span>
+              </div>
+              <input type="range" id="creditoObraSlider" min="30000" max="1000000" step="10000" value="150000"
+                oninput="updateSlider('creditoObraSlider','creditoObraVal', formatCurrency)" />
+              <div class="slider-range"><span>R$ 30 mil</span><span>R$ 1 milhão</span></div>
+            </div>
+            <div class="field-group">
+              <label for="estadoObra">Estado onde será a obra</label>
+              <div class="select-wrap"><select id="estadoObra">
+                <option value="">Selecione o estado...</option>
+                <option>AC</option><option>AL</option><option>AM</option><option>AP</option>
+                <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+                <option>GO</option><option>MA</option><option>MG</option><option>MS</option>
+                <option>MT</option><option>PA</option><option>PB</option><option>PE</option>
+                <option>PI</option><option>PR</option><option>RJ</option><option>RN</option>
+                <option>RO</option><option>RR</option><option>RS</option><option>SC</option>
+                <option>SE</option><option>SP</option><option>TO</option>
+              </select></div>
+            </div>
+          </div><!-- /panel-construcao -->
+
+          <div class="form-nav">
+            <button class="btn-back" onclick="prevStep(2)">
+              <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              Voltar
+            </button>
+            <button class="btn-next" onclick="nextStep(2)">
+              <svg class="fn-arr-left" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              <span class="fn-text">Próximo</span>
+              <span class="fn-circle"></span>
+              <svg class="fn-arr-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ── ETAPA 3 – Perfil pessoal ── -->
+        <div class="step" id="step-3">
+          <div class="step-header">
+            <h2 class="step-title">Seu perfil pessoal</h2>
+            <p class="step-subtitle">Informações para montar a proposta ideal.</p>
+          </div>
+
+          <div class="field-group">
+            <div class="field-row">
+              <div>
+                <label for="nome">Nome<span class="req">*</span></label>
+                <input type="text" id="nome" placeholder="Seu nome completo" />
+              </div>
+              <div>
+                <label for="idade">Idade</label>
+                <input type="number" id="idade" placeholder="Ex: 32" min="18" max="99" />
+              </div>
+            </div>
+          </div>
+
+          <p class="section-label">Situação profissional</p>
+          <div class="option-grid cols-3" style="margin-bottom:24px">
+            <div class="option-card" data-group="profissao" data-value="clt">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></span>
+              <span class="option-label">CLT</span>
+            </div>
+            <div class="option-card" data-group="profissao" data-value="mei">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></span>
+              <span class="option-label">MEI / Autônomo</span>
+            </div>
+            <div class="option-card" data-group="profissao" data-value="pj">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="1"/><path d="M9 22v-4h6v4"/><rect x="8" y="6" width="2" height="2" rx="0.5"/><rect x="14" y="6" width="2" height="2" rx="0.5"/><rect x="8" y="11" width="2" height="2" rx="0.5"/><rect x="14" y="11" width="2" height="2" rx="0.5"/></svg></span>
+              <span class="option-label">Empresário / PJ</span>
+            </div>
+            <div class="option-card" data-group="profissao" data-value="servidor">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg></span>
+              <span class="option-label">Servidor público</span>
+            </div>
+            <div class="option-card" data-group="profissao" data-value="aposentado">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M17 18a5 5 0 00-10 0"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/></svg></span>
+              <span class="option-label">Aposentado</span>
+            </div>
+            <div class="option-card" data-group="profissao" data-value="outro">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="5" cy="12" r="1" fill="currentColor" stroke="none"/></svg></span>
+              <span class="option-label">Outro</span>
+            </div>
+          </div>
+
+          <p class="section-label">Já possui consórcio ou financiamento ativo?</p>
+          <div class="option-grid cols-2">
+            <div class="option-card inline" data-group="consorcio_ativo" data-value="sim">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+              <span class="option-label">Sim</span>
+            </div>
+            <div class="option-card inline" data-group="consorcio_ativo" data-value="nao">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></span>
+              <span class="option-label">Não</span>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <button class="btn-back" onclick="prevStep(3)">
+              <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              Voltar
+            </button>
+            <button class="btn-next" onclick="nextStep(3)">
+              <svg class="fn-arr-left" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              <span class="fn-text">Próximo</span>
+              <span class="fn-circle"></span>
+              <svg class="fn-arr-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ── ETAPA 4 – Perfil financeiro ── -->
+        <div class="step" id="step-4">
+          <div class="step-header">
+            <h2 class="step-title">Seu perfil financeiro</h2>
+            <p class="step-subtitle">Garante que a proposta caiba no seu orçamento.</p>
+          </div>
+
+          <p class="section-label">Renda bruta mensal familiar</p>
+          <div class="option-grid cols-2" style="margin-bottom:28px">
+            <div class="option-card" data-group="renda" data-value="ate5k">
+              <span class="option-label">Até R$ 5.000</span>
+            </div>
+            <div class="option-card" data-group="renda" data-value="5k10k">
+              <span class="option-label">R$ 5k – R$ 10k</span>
+            </div>
+            <div class="option-card" data-group="renda" data-value="10k20k">
+              <span class="option-label">R$ 10k – R$ 20k</span>
+            </div>
+            <div class="option-card" data-group="renda" data-value="acima20k">
+              <span class="option-label">Acima de R$ 20k</span>
+            </div>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span class="slider-label">Parcela mensal que cabe no orçamento</span>
+              <span class="slider-value" id="parcelaVal">R$ 2.000</span>
+            </div>
+            <input type="range" id="parcelaSlider" min="400" max="8000" step="100" value="2000"
+              oninput="updateSlider('parcelaSlider','parcelaVal', formatCurrency)" />
+            <div class="slider-range">
+              <span>R$ 400</span>
+              <span>R$ 8.000</span>
+            </div>
+          </div>
+
+          <p class="section-label">Situação do nome</p>
+          <div class="option-grid cols-2" style="margin-bottom:24px">
+            <div class="option-card inline" data-group="negativacao" data-value="limpo">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+              <span class="option-label">Nome limpo</span>
+            </div>
+            <div class="option-card inline" data-group="negativacao" data-value="restricoes">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+              <span class="option-label">Tenho restrições</span>
+            </div>
+          </div>
+
+          <p class="section-label">Urgência</p>
+          <div class="option-grid cols-2">
+            <div class="option-card" data-group="urgencia" data-value="lance">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+              <span class="option-label">O mais rápido (lance)</span>
+            </div>
+            <div class="option-card" data-group="urgencia" data-value="sorteio">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3"/><circle cx="8" cy="8" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="16" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="8" r="1" fill="currentColor" stroke="none"/><circle cx="8" cy="16" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg></span>
+              <span class="option-label">Sorteio, sem pressa</span>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <button class="btn-back" onclick="prevStep(4)">
+              <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              Voltar
+            </button>
+            <button class="btn-next" onclick="nextStep(4)">
+              <svg class="fn-arr-left" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              <span class="fn-text">Próximo</span>
+              <span class="fn-circle"></span>
+              <svg class="fn-arr-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ── ETAPA 5 – Contato ── -->
+        <div class="step" id="step-5">
+          <div class="step-header">
+            <h2 class="step-title">Como podemos te contatar?</h2>
+            <p class="step-subtitle">Último passo! Prometemos não enviar spam.</p>
+          </div>
+
+          <div class="field-group">
+            <label for="whatsapp">WhatsApp<span class="req">*</span></label>
+            <input type="text" id="whatsapp" placeholder="(11) 99999-9999" maxlength="15" />
+            <span class="error-msg" id="whatsapp-error">Por favor, informe seu WhatsApp.</span>
+          </div>
+
+          <div class="field-group">
+            <label for="email">E-mail <span style="color:var(--text-light);font-weight:400">(opcional)</span></label>
+            <input type="email" id="email" placeholder="seu@email.com" />
+          </div>
+
+          <p class="section-label">Canal preferido de contato</p>
+          <div class="option-grid cols-2" style="margin-bottom:24px">
+            <div class="option-card inline" data-group="canal" data-value="whatsapp">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+              <span class="option-label">WhatsApp</span>
+            </div>
+            <div class="option-card inline" data-group="canal" data-value="ligacao">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.02 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.06 6.06l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></span>
+              <span class="option-label">Ligação</span>
+            </div>
+          </div>
+
+          <p class="section-label">Melhor horário</p>
+          <div class="option-grid cols-4">
+            <div class="option-card icon-only" data-group="horario" data-value="manha" data-tooltip="Manhã">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M17 18a5 5 0 00-10 0"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/></svg></span>
+            </div>
+            <div class="option-card icon-only" data-group="horario" data-value="tarde" data-tooltip="Tarde">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+            </div>
+            <div class="option-card icon-only" data-group="horario" data-value="noite" data-tooltip="Noite">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+            </div>
+            <div class="option-card icon-only" data-group="horario" data-value="qualquer" data-tooltip="Qualquer">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <button class="btn-back" onclick="prevStep(5)">
+              <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              Voltar
+            </button>
+            <button class="btn-next btn-submit" onclick="submitForm()" style="border-color: rgba(16,185,129,0.4); color: #059669;">
+              <svg class="fn-arr-left" viewBox="0 0 24 24" style="stroke:#059669"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              <span class="fn-text">Enviar proposta</span>
+              <span class="fn-circle" style="background:#059669;"></span>
+              <svg class="fn-arr-right" viewBox="0 0 24 24" style="stroke:#059669"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /steps-container -->
+
+      <!-- ── TELA DE SUCESSO ── -->
+      <div class="success-screen" id="successScreen">
+        <div class="success-badge">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2 class="success-title">Parabéns! 🎉</h2>
+        <p class="success-text">
+          Recebemos suas informações e um especialista da Porto Vale Consórcio entrará em contato em breve com uma proposta exclusiva para você.
+        </p>
+        <div class="next-steps">
+          <div class="next-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <strong>Análise do seu perfil</strong>
+              <span>Nossa equipe avaliará suas informações e preparará as melhores opções de consórcio.</span>
+            </div>
+          </div>
+          <div class="next-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <strong>Contato personalizado</strong>
+              <span>Você receberá uma mensagem via WhatsApp com uma simulação detalhada e sem compromisso.</span>
+            </div>
+          </div>
+          <div class="next-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <strong>Seu imóvel mais perto</strong>
+              <span>Com a proposta aprovada, iniciamos o processo para que você conquiste o seu imóvel.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div><!-- /form-card -->
+    </div><!-- /modal-inner -->
+  </div><!-- /form-wrapper -->
+
+  <script>
+    // ─── Open / close form modal ─────────────────────────────────────
+    function openForm() {
+      document.getElementById('formWrapper').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeForm() {
+      document.getElementById('formWrapper').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Close on backdrop click
+    document.getElementById('formWrapper').addEventListener('click', function(e) {
+      if (e.target === this) closeForm();
+    });
+
+    // ─── State ──────────────────────────────────────────────────────
+    let currentStep = 1;
+    const totalSteps = 5;
+    const formData = {};
+
+    // ─── Progress ───────────────────────────────────────────────────
+    function updateProgress(step) {
+      const pct = ((step - 1) / totalSteps) * 100 + (100 / totalSteps) * 0.5;
+      document.getElementById('progressFill').style.width = Math.min(pct, 95) + '%';
+
+      document.querySelectorAll('.progress-label').forEach(el => {
+        const s = parseInt(el.dataset.step);
+        el.classList.remove('active', 'done');
+        if (s === step) el.classList.add('active');
+        else if (s < step) el.classList.add('done');
+      });
+    }
+
+    // ─── Navigation ─────────────────────────────────────────────────
+    function goToStep(target, direction) {
+      const current = document.getElementById(`step-${currentStep}`);
+      current.style.animation = '';
+      current.classList.remove('active', 'from-back', 'slide-out');
+
+      currentStep = target;
+      const next = document.getElementById(`step-${currentStep}`);
+      next.style.animation = '';
+      next.classList.remove('from-back');
+      if (direction === 'back') next.classList.add('from-back');
+      next.classList.add('active');
+      updateProgress(currentStep);
+      document.getElementById('formWrapper').scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function nextStep(from) {
+      if (!validateStep(from)) return;
+      if (from === 1) {
+        const obj = formData.objetivo;
+        const panelMap     = { compra: 'panel-compra', terreno: 'panel-terreno', construcao: 'panel-construcao' };
+        const titleMap     = { compra: 'Sobre o imóvel desejado', terreno: 'Sobre o terreno', construcao: 'Sobre a obra' };
+        const subtitleMap  = { compra: 'Tipo, valor e localização.', terreno: 'Finalidade, valor e estado.', construcao: 'Tipo de obra, valor e estado.' };
+        const labelMap     = { compra: 'Imóvel', terreno: 'Terreno', construcao: 'Obra' };
+        const iconMap      = {
+          compra:    '<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+          terreno:   '<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/>',
+          construcao:'<path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>'
+        };
+        document.querySelectorAll('.step2-panel').forEach(p => p.style.display = 'none');
+        const panel = document.getElementById(panelMap[obj]);
+        if (panel) panel.style.display = '';
+        document.getElementById('step2-title').textContent    = titleMap[obj]    || 'Sobre o imóvel';
+        document.getElementById('step2-subtitle').textContent = subtitleMap[obj] || '';
+        const labelEl = document.querySelector('.progress-label[data-step="2"] .pl-text');
+        if (labelEl) labelEl.textContent = labelMap[obj] || 'Imóvel';
+        const iconEl = document.querySelector('.progress-label[data-step="2"] .pl-icon svg');
+        if (iconEl && iconMap[obj]) iconEl.innerHTML = iconMap[obj];
+      }
+      goToStep(from + 1, 'forward');
+    }
+
+    function prevStep(from) {
+      goToStep(from - 1, 'back');
+    }
+
+    // ─── Validation ─────────────────────────────────────────────────
+    function validateStep(step) {
+      if (step === 1) {
+        if (!formData.objetivo) {
+          alert('Por favor, selecione um objetivo.');
+          return false;
+        }
+      }
+      if (step === 5) {
+        const wpp = document.getElementById('whatsapp');
+        const err = document.getElementById('whatsapp-error');
+        const raw = wpp.value.replace(/\D/g, '');
+        if (raw.length < 10) {
+          wpp.classList.add('error');
+          err.classList.add('visible');
+          wpp.focus();
+          return false;
+        }
+        wpp.classList.remove('error');
+        err.classList.remove('visible');
+      }
+      return true;
+    }
+
+    // ─── Submit ─────────────────────────────────────────────────────
+    function submitForm() {
+      if (!validateStep(5)) return;
+
+      // Collect remaining data
+      formData.whatsapp = document.getElementById('whatsapp').value;
+      formData.email    = document.getElementById('email').value;
+      formData.nome     = document.getElementById('nome').value;
+      formData.idade    = document.getElementById('idade').value;
+      formData.parcela = document.getElementById('parcelaSlider').value;
+      const obj = formData.objetivo;
+      if (obj === 'compra') {
+        formData.credito = document.getElementById('creditoCompraSlider').value;
+        formData.estado  = document.getElementById('estadoCompra').value;
+      } else if (obj === 'terreno') {
+        formData.credito = document.getElementById('creditoTerrenoSlider').value;
+        formData.estado  = document.getElementById('estadoTerreno').value;
+      } else if (obj === 'construcao') {
+        formData.credito = document.getElementById('creditoObraSlider').value;
+        formData.estado  = document.getElementById('estadoObra').value;
+      }
+
+      console.log('Form data:', formData);
+
+      // Show success
+      document.getElementById('stepsContainer').style.display = 'none';
+      document.getElementById('progressWrap').style.display = 'none';
+      const success = document.getElementById('successScreen');
+      success.classList.add('active');
+      document.getElementById('formWrapper').scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ─── Option cards ────────────────────────────────────────────────
+    document.querySelectorAll('.option-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const group = card.dataset.group;
+        document.querySelectorAll(`.option-card[data-group="${group}"]`)
+          .forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        formData[group] = card.dataset.value;
+      });
+    });
+
+    // ─── Sliders ─────────────────────────────────────────────────────
+    function formatCurrency(val) {
+      const n = parseInt(val);
+      if (n >= 1000000) return 'R$ ' + (n / 1000000).toFixed(1).replace('.', ',') + ' mi';
+      if (n >= 1000)    return 'R$ ' + (n / 1000).toFixed(0) + ' mil';
+      return 'R$ ' + n.toLocaleString('pt-BR');
+    }
+
+    function updateSlider(sliderId, displayId, formatter) {
+      const val = document.getElementById(sliderId).value;
+      document.getElementById(displayId).textContent = formatter(val);
+      const slider = document.getElementById(sliderId);
+      const pct = (val - slider.min) / (slider.max - slider.min) * 100;
+      slider.style.background = `linear-gradient(to right, #16a7e0 ${pct}%, #d1d5db ${pct}%)`;
+    }
+
+    // Init sliders
+    updateSlider('creditoCompraSlider',   'creditoCompraVal',   formatCurrency);
+    updateSlider('creditoTerrenoSlider',  'creditoTerrenoVal',  formatCurrency);
+    updateSlider('creditoObraSlider',     'creditoObraVal',     formatCurrency);
+    updateSlider('parcelaSlider', 'parcelaVal', formatCurrency);
+
+    // ─── Phone mask ───────────────────────────────────────────────────
+    document.getElementById('whatsapp').addEventListener('input', function(e) {
+      let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+      if (v.length <= 10) {
+        v = v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+      } else {
+        v = v.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+      }
+      e.target.value = v.replace(/-$/, '');
+    });
+
+    document.getElementById('whatsapp').addEventListener('focus', function() {
+      this.classList.remove('error');
+      document.getElementById('whatsapp-error').classList.remove('visible');
+    });
+
+    // ─── Click on progress labels to jump to any step ────────────────
+    document.querySelectorAll('.progress-label').forEach(label => {
+      label.addEventListener('click', () => {
+        const target = parseInt(label.dataset.step);
+        if (target === currentStep) return;
+        const direction = target > currentStep ? 'forward' : 'back';
+        goToStep(target, direction);
+      });
+    });
+
+    // Init progress
+    updateProgress(1);
+  </script>
+</body>
+</html>
