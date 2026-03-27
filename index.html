@@ -25,6 +25,18 @@
       --trans:     0.25s ease;
     }
 
+    /* ─── Animated gradient border (CSS @property) ───────────────── */
+    @property --gradient-angle {
+      syntax: '<angle>';
+      inherits: false;
+      initial-value: 0deg;
+    }
+
+    @keyframes gradient-rotate {
+      from { --gradient-angle: 0deg; }
+      to   { --gradient-angle: 360deg; }
+    }
+
     html { scroll-behavior: smooth; }
 
     body {
@@ -390,7 +402,6 @@
     .form-card {
       width: 100%;
       max-width: 640px;
-      background: var(--card-bg);
       border-radius: 24px;
       box-shadow:
         0 24px 72px rgba(10,8,6,0.22),
@@ -400,6 +411,23 @@
       opacity: 0;
       transition: transform 0.38s cubic-bezier(0.34, 1.26, 0.64, 1), opacity 0.3s ease;
       flex-shrink: 0;
+      /* Animated gradient border */
+      border: 2px solid transparent;
+      background-image:
+        linear-gradient(#ebebed, #ebebed),
+        conic-gradient(
+          from var(--gradient-angle),
+          #0d6e96 0%,
+          #1e9fd4 25%,
+          #80deff 40%,
+          #b2f8ff 50%,
+          #80deff 60%,
+          #1e9fd4 75%,
+          #0d6e96 100%
+        );
+      background-clip: padding-box, border-box;
+      background-origin: padding-box, border-box;
+      animation: gradient-rotate 4s linear infinite;
     }
 
     .form-wrapper.open .form-card {
@@ -1190,14 +1218,13 @@
     }
 
     /* ─── Modal light-gray theme ─────────────────────────────────── */
-    .form-card { background: #ebebed; }
 
     .form-card .progress-bar-wrap {
       background: #e2e2e5;
       border-bottom-color: rgba(0,0,0,0.06);
     }
 
-    .form-card .progress-fill::after { background: #ebebed; }
+    .form-card .progress-fill::after { background: #e8e8ea; }
 
     /* Cards — branco sem borda; hover/selected ganham borda azul */
     .form-card .option-card {
@@ -1283,6 +1310,18 @@
         max-height: calc(100dvh - 52px);
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
+        background-image:
+          linear-gradient(#ebebed, #ebebed),
+          conic-gradient(
+            from var(--gradient-angle),
+            #0d6e96 0%,
+            #1e9fd4 25%,
+            #80deff 40%,
+            #b2f8ff 50%,
+            #80deff 60%,
+            #1e9fd4 75%,
+            #0d6e96 100%
+          );
       }
 
       /* Progress */
