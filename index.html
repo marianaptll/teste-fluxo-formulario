@@ -1242,24 +1242,93 @@
       box-shadow: none;
     }
 
+    /* ─── Icon-only: esconde label no desktop (tooltip cuida disso) ── */
+    .option-card.icon-only .option-label { display: none; }
+
     /* ─── Responsivo ─────────────────────────────────────────────── */
     @media (max-width: 600px) {
       header { padding: 16px 20px; }
       .header-badge { display: none; }
-      .hero { padding: 44px 20px 0; }
+
+      /* Hero */
+      .hero { padding: 40px 16px 48px; min-height: auto; }
+      .hero-img-title { max-width: 88%; margin-bottom: 28px; }
+      .hero-img-condition { margin-bottom: 36px; }
       .hero-stats { gap: 20px; }
       .stat-value { font-size: 22px; }
-      .steps-container { padding: 24px 20px 20px; }
-      .progress-bar-wrap { padding: 22px 20px 0; }
+
+      /* CTA button */
+      .btn-cta { padding: 18px 36px; font-size: 13px; }
+
+      /* ── Modal: full-screen sheet ── */
+      .form-wrapper {
+        padding: 0;
+        align-items: flex-start;
+        overflow-y: hidden;
+      }
+      .modal-inner {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 52px;
+      }
+      .modal-close {
+        top: -44px;
+        right: 16px;
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+      }
+      .form-card {
+        border-radius: 20px 20px 0 0;
+        max-height: calc(100dvh - 52px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      /* Progress */
+      .steps-container { padding: 20px 16px 16px; }
+      .progress-bar-wrap { padding: 18px 16px 0; }
+      .progress-label { padding: 3px 5px; }
+
+      /* Option grids */
       .option-grid.cols-4 { grid-template-columns: 1fr 1fr; }
       .option-grid.cols-3 { grid-template-columns: 1fr 1fr; }
       .field-row { grid-template-columns: 1fr; }
-      .btn-back { padding: 14px 16px; }
-      .success-screen { padding: 36px 20px; }
+
+      /* Tooltip → label visível no mobile */
+      .option-card.icon-only::after { display: none; }
+      .option-card.icon-only .option-label {
+        display: block;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-top: 4px;
+        line-height: 1.2;
+      }
+      .option-card.icon-only.selected .option-label { color: var(--accent-dk); }
+
+      /* Nav buttons */
+      .btn-back { padding: 14px 10px; font-size: 13px; }
+      .btn-next { padding: 13px 24px; font-size: 11px; }
+      .form-nav { padding-top: 16px; gap: 8px; }
+
+      /* Success */
+      .success-screen { padding: 36px 16px; }
+
+      /* Step header */
+      .step-title { font-size: 18px; }
+      .step-subtitle { font-size: 13px; }
+
+      /* Inputs */
+      input[type="text"],
+      input[type="email"],
+      input[type="number"],
+      select { font-size: 16px; } /* evita zoom automático no iOS */
     }
 
     @media (max-width: 400px) {
       .option-grid.cols-2 { grid-template-columns: 1fr; }
+      .option-grid.cols-4 { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -1405,19 +1474,6 @@
                 oninput="updateSlider('creditoCompraSlider','creditoCompraVal', formatCurrency)" />
               <div class="slider-range"><span>R$ 100 mil</span><span>R$ 1,5 milhão</span></div>
             </div>
-            <div class="field-group">
-              <label for="estadoCompra">Estado onde deseja o imóvel</label>
-              <div class="select-wrap"><select id="estadoCompra">
-                <option value="">Selecione o estado...</option>
-                <option>AC</option><option>AL</option><option>AM</option><option>AP</option>
-                <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
-                <option>GO</option><option>MA</option><option>MG</option><option>MS</option>
-                <option>MT</option><option>PA</option><option>PB</option><option>PE</option>
-                <option>PI</option><option>PR</option><option>RJ</option><option>RN</option>
-                <option>RO</option><option>RR</option><option>RS</option><option>SC</option>
-                <option>SE</option><option>SP</option><option>TO</option>
-              </select></div>
-            </div>
           </div><!-- /panel-compra -->
 
           <!-- PANEL: Terreno -->
@@ -1449,19 +1505,6 @@
               <input type="range" id="creditoTerrenoSlider" min="50000" max="800000" step="10000" value="200000"
                 oninput="updateSlider('creditoTerrenoSlider','creditoTerrenoVal', formatCurrency)" />
               <div class="slider-range"><span>R$ 50 mil</span><span>R$ 800 mil</span></div>
-            </div>
-            <div class="field-group">
-              <label for="estadoTerreno">Estado onde deseja o terreno</label>
-              <div class="select-wrap"><select id="estadoTerreno">
-                <option value="">Selecione o estado...</option>
-                <option>AC</option><option>AL</option><option>AM</option><option>AP</option>
-                <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
-                <option>GO</option><option>MA</option><option>MG</option><option>MS</option>
-                <option>MT</option><option>PA</option><option>PB</option><option>PE</option>
-                <option>PI</option><option>PR</option><option>RJ</option><option>RN</option>
-                <option>RO</option><option>RR</option><option>RS</option><option>SC</option>
-                <option>SE</option><option>SP</option><option>TO</option>
-              </select></div>
             </div>
           </div><!-- /panel-terreno -->
 
@@ -1495,19 +1538,6 @@
                 oninput="updateSlider('creditoObraSlider','creditoObraVal', formatCurrency)" />
               <div class="slider-range"><span>R$ 30 mil</span><span>R$ 1 milhão</span></div>
             </div>
-            <div class="field-group">
-              <label for="estadoObra">Estado onde será a obra</label>
-              <div class="select-wrap"><select id="estadoObra">
-                <option value="">Selecione o estado...</option>
-                <option>AC</option><option>AL</option><option>AM</option><option>AP</option>
-                <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
-                <option>GO</option><option>MA</option><option>MG</option><option>MS</option>
-                <option>MT</option><option>PA</option><option>PB</option><option>PE</option>
-                <option>PI</option><option>PR</option><option>RJ</option><option>RN</option>
-                <option>RO</option><option>RR</option><option>RS</option><option>SC</option>
-                <option>SE</option><option>SP</option><option>TO</option>
-              </select></div>
-            </div>
           </div><!-- /panel-construcao -->
 
           <div class="form-nav">
@@ -1532,16 +1562,8 @@
           </div>
 
           <div class="field-group">
-            <div class="field-row">
-              <div>
-                <label for="nome">Nome<span class="req">*</span></label>
-                <input type="text" id="nome" placeholder="Seu nome completo" />
-              </div>
-              <div>
-                <label for="idade">Idade</label>
-                <input type="number" id="idade" placeholder="Ex: 32" min="18" max="99" />
-              </div>
-            </div>
+            <label for="nome">Nome<span class="req">*</span></label>
+            <input type="text" id="nome" placeholder="Seu nome completo" />
           </div>
 
           <p class="section-label">Situação profissional</p>
@@ -1706,15 +1728,19 @@
           <div class="option-grid cols-4">
             <div class="option-card icon-only" data-group="horario" data-value="manha" data-tooltip="Manhã">
               <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M17 18a5 5 0 00-10 0"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/></svg></span>
+              <span class="option-label">Manhã</span>
             </div>
             <div class="option-card icon-only" data-group="horario" data-value="tarde" data-tooltip="Tarde">
               <span class="option-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+              <span class="option-label">Tarde</span>
             </div>
             <div class="option-card icon-only" data-group="horario" data-value="noite" data-tooltip="Noite">
               <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+              <span class="option-label">Noite</span>
             </div>
             <div class="option-card icon-only" data-group="horario" data-value="qualquer" data-tooltip="Qualquer">
               <span class="option-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+              <span class="option-label">Qualquer</span>
             </div>
           </div>
 
@@ -1885,18 +1911,14 @@
       formData.whatsapp = document.getElementById('whatsapp').value;
       formData.email    = document.getElementById('email').value;
       formData.nome     = document.getElementById('nome').value;
-      formData.idade    = document.getElementById('idade').value;
-      formData.parcela = document.getElementById('parcelaSlider').value;
+      formData.parcela  = document.getElementById('parcelaSlider').value;
       const obj = formData.objetivo;
       if (obj === 'compra') {
         formData.credito = document.getElementById('creditoCompraSlider').value;
-        formData.estado  = document.getElementById('estadoCompra').value;
       } else if (obj === 'terreno') {
         formData.credito = document.getElementById('creditoTerrenoSlider').value;
-        formData.estado  = document.getElementById('estadoTerreno').value;
       } else if (obj === 'construcao') {
         formData.credito = document.getElementById('creditoObraSlider').value;
-        formData.estado  = document.getElementById('estadoObra').value;
       }
 
       console.log('Form data:', formData);
