@@ -1450,7 +1450,7 @@
               <span class="option-label">Compra de imóvel</span>
             </div>
             <div class="option-card" data-group="objetivo" data-value="terreno">
-              <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M2 20h20"/><path d="M2 20l4-8 4 4 4-6 5 10"/><line x1="12" y1="3" x2="12" y2="5"/><line x1="4.22" y1="5.22" x2="5.64" y2="6.64"/><line x1="19.78" y1="5.22" x2="18.36" y2="6.64"/><line x1="2" y1="11" x2="4" y2="11"/><line x1="20" y1="11" x2="22" y2="11"/><circle cx="12" cy="8" r="3"/></svg></span>
+              <span class="option-icon"><svg viewBox="0 0 24 24"><polygon points="3,6 9,3 15,6 21,3 21,18 15,21 9,18 3,21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg></span>
               <span class="option-label">Terreno</span>
             </div>
             <div class="option-card" data-group="objetivo" data-value="construcao">
@@ -1502,9 +1502,9 @@
                 <span class="slider-label">Valor estimado do imóvel</span>
                 <span class="slider-value" id="creditoCompraVal">R$ 350 mil</span>
               </div>
-              <input type="range" id="creditoCompraSlider" min="100000" max="1500000" step="10000" value="350000"
+              <input type="range" id="creditoCompraSlider" min="100000" max="1000000" step="10000" value="350000"
                 oninput="updateSlider('creditoCompraSlider','creditoCompraVal', formatCurrency)" />
-              <div class="slider-range"><span>R$ 100 mil</span><span>R$ 1,5 milhão</span></div>
+              <div class="slider-range"><span>R$ 100 mil</span><span>R$ 1 milhão</span></div>
             </div>
           </div><!-- /panel-compra -->
 
@@ -1534,9 +1534,9 @@
                 <span class="slider-label">Valor estimado do terreno</span>
                 <span class="slider-value" id="creditoTerrenoVal">R$ 200 mil</span>
               </div>
-              <input type="range" id="creditoTerrenoSlider" min="50000" max="800000" step="10000" value="200000"
+              <input type="range" id="creditoTerrenoSlider" min="50000" max="1000000" step="10000" value="200000"
                 oninput="updateSlider('creditoTerrenoSlider','creditoTerrenoVal', formatCurrency)" />
-              <div class="slider-range"><span>R$ 50 mil</span><span>R$ 800 mil</span></div>
+              <div class="slider-range"><span>R$ 50 mil</span><span>R$ 1 milhão</span></div>
             </div>
           </div><!-- /panel-terreno -->
 
@@ -1590,12 +1590,7 @@
         <div class="step" id="step-3">
           <div class="step-header">
             <h2 class="step-title">Seu perfil pessoal</h2>
-            <p class="step-subtitle">Informações para montar a proposta ideal.</p>
-          </div>
-
-          <div class="field-group">
-            <label for="nome">Nome<span class="req">*</span></label>
-            <input type="text" id="nome" placeholder="Seu nome completo" />
+            <p class="step-subtitle">Selecione sua situação profissional.</p>
           </div>
 
           <p class="section-label">Situação profissional</p>
@@ -1754,15 +1749,20 @@
             <p class="step-subtitle">Informe seus dados de contato.</p>
           </div>
 
+          <div class="field-group">
+            <label for="nome">Nome<span class="req">*</span></label>
+            <input type="text" id="nome" placeholder="Seu nome completo" autocomplete="name" />
+          </div>
+
           <div class="field-row">
             <div class="field-group">
               <label for="whatsapp">WhatsApp<span class="req">*</span></label>
-              <input type="text" id="whatsapp" placeholder="(11) 99999-9999" maxlength="15" />
+              <input type="tel" id="whatsapp" placeholder="(11) 99999-9999" maxlength="15" inputmode="numeric" autocomplete="tel" />
               <span class="error-msg" id="whatsapp-error">Por favor, informe seu WhatsApp.</span>
             </div>
             <div class="field-group">
               <label for="email">E-mail <span style="color:var(--text-light);font-weight:400">(opcional)</span></label>
-              <input type="email" id="email" placeholder="seu@email.com" />
+              <input type="email" id="email" placeholder="seu@email.com" autocomplete="email" />
             </div>
           </div>
 
@@ -1800,6 +1800,10 @@
           </div>
 
           <div class="option-grid cols-2">
+            <div class="option-card icon-only selected" data-group="horario" data-value="qualquer">
+              <span class="option-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+              <span class="option-label">Qualquer horário</span>
+            </div>
             <div class="option-card icon-only" data-group="horario" data-value="manha">
               <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M17 18a5 5 0 00-10 0"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/></svg></span>
               <span class="option-label">Manhã</span>
@@ -1811,10 +1815,6 @@
             <div class="option-card icon-only" data-group="horario" data-value="noite">
               <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
               <span class="option-label">Noite</span>
-            </div>
-            <div class="option-card icon-only" data-group="horario" data-value="qualquer">
-              <span class="option-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
-              <span class="option-label">Qualquer horário</span>
             </div>
           </div>
 
@@ -1892,7 +1892,7 @@
     // ─── State ──────────────────────────────────────────────────────
     let currentStep = 1;
     const totalSteps = 7;
-    const formData = {};
+    const formData = { horario: 'qualquer' };
 
     // ─── Progress ───────────────────────────────────────────────────
     function updateProgress(step) {
@@ -1933,7 +1933,7 @@
         const labelMap     = { compra: 'Imóvel', terreno: 'Terreno', construcao: 'Obra' };
         const iconMap      = {
           compra:    '<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
-          terreno:   '<path d="M2 20h20"/><path d="M2 20l4-8 4 4 4-6 5 10"/><line x1="12" y1="3" x2="12" y2="5"/><line x1="4.22" y1="5.22" x2="5.64" y2="6.64"/><line x1="19.78" y1="5.22" x2="18.36" y2="6.64"/><line x1="2" y1="11" x2="4" y2="11"/><line x1="20" y1="11" x2="22" y2="11"/><circle cx="12" cy="8" r="3"/>',
+          terreno:   '<polygon points="3,6 9,3 15,6 21,3 21,18 15,21 9,18 3,21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/>',
           construcao:'<path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>'
         };
         document.querySelectorAll('.step2-panel').forEach(p => p.style.display = 'none');
