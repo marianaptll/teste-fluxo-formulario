@@ -1088,22 +1088,20 @@
     /* ─── Success screen ─────────────────────────────────────────── */
     .success-screen {
       display: none;
-      padding: 48px 32px;
+      background: #1e9fd4;
+      padding: 64px 40px;
       text-align: center;
-    }
-
-    .success-screen.active { display: block; }
-
-    .success-badge {
-      width: 80px; height: 80px;
-      background: linear-gradient(135deg, var(--success), #059669);
-      border-radius: 50%;
-      margin: 0 auto 24px;
-      display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 8px 24px rgba(16,185,129,0.35);
-      animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .success-screen.active { display: flex; }
+
+    .success-badge {
+      width: 110px; height: 110px;
+      margin: 0 auto 32px;
+      animation: popIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     @keyframes popIn {
@@ -1112,78 +1110,24 @@
     }
 
     .success-badge svg {
-      width: 38px; height: 38px;
-      stroke: #fff;
-      stroke-width: 2.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      fill: none;
+      width: 110px; height: 110px;
     }
 
     .success-title {
       font-family: 'Montserrat', sans-serif;
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--text-dark);
-      margin-bottom: 10px;
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 14px;
     }
 
     .success-text {
-      font-size: 15px;
-      color: var(--text-mid);
-      max-width: 380px;
-      margin: 0 auto 32px;
+      font-size: 16px;
+      color: rgba(255,255,255,0.88);
+      max-width: 320px;
+      margin: 0 auto;
       line-height: 1.65;
-    }
-
-    .next-steps {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      text-align: left;
-    }
-
-    .next-step {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 16px 18px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      animation: slideIn 0.4s ease both;
-    }
-
-    .next-step:nth-child(1) { animation-delay: 0.2s; }
-    .next-step:nth-child(2) { animation-delay: 0.35s; }
-    .next-step:nth-child(3) { animation-delay: 0.5s; }
-
-    .step-num {
-      width: 32px; height: 32px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-dk));
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 800;
-      color: #fff;
-      flex-shrink: 0;
-    }
-
-    .step-content strong {
-      display: block;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text-dark);
-      margin-bottom: 3px;
-    }
-
-    .step-content span {
-      font-size: 13px;
-      color: var(--text-mid);
-      line-height: 1.5;
+      font-weight: 500;
     }
 
     /* ─── Icon-only card + tooltip ──────────────────────────────── */
@@ -1837,35 +1781,13 @@
       <!-- ── TELA DE SUCESSO ── -->
       <div class="success-screen" id="successScreen">
         <div class="success-badge">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.85 8.62a4 4 0 014.78-4.77 4 4 0 016.74 0 4 4 0 014.78 4.78 4 4 0 010 6.74 4 4 0 01-4.77 4.78 4 4 0 01-6.75 0 4 4 0 01-4.78-4.77 4 4 0 010-6.76z" fill="white"/>
+            <path d="M9 12l2 2 4-4" stroke="#1e9fd4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
-        <h2 class="success-title">Parabéns! 🎉</h2>
-        <p class="success-text">
-          Recebemos suas informações e um especialista da Porto Vale Consórcio entrará em contato em breve com uma proposta exclusiva para você.
-        </p>
-        <div class="next-steps">
-          <div class="next-step">
-            <div class="step-num">1</div>
-            <div class="step-content">
-              <strong>Análise do seu perfil</strong>
-              <span>Nossa equipe avaliará suas informações e preparará as melhores opções de consórcio.</span>
-            </div>
-          </div>
-          <div class="next-step">
-            <div class="step-num">2</div>
-            <div class="step-content">
-              <strong>Contato personalizado</strong>
-              <span>Você receberá uma mensagem via WhatsApp com uma simulação detalhada e sem compromisso.</span>
-            </div>
-          </div>
-          <div class="next-step">
-            <div class="step-num">3</div>
-            <div class="step-content">
-              <strong>Seu imóvel mais perto</strong>
-              <span>Com a proposta aprovada, iniciamos o processo para que você conquiste o seu imóvel.</span>
-            </div>
-          </div>
-        </div>
+        <h2 class="success-title">Parabéns!</h2>
+        <p class="success-text">Nossa equipe avaliará suas informações e preparará as melhores opções de consórcio para você.</p>
       </div>
 
       </div><!-- /form-card -->
