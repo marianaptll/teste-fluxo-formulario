@@ -1085,50 +1085,6 @@
 
     input.error { border-color: #ef4444 !important; }
 
-    /* ─── Success screen ─────────────────────────────────────────── */
-    .success-screen {
-      display: none;
-      background: #1e9fd4;
-      padding: 64px 40px;
-      text-align: center;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .success-screen.active { display: flex; }
-
-    .success-badge {
-      width: 110px; height: 110px;
-      margin: 0 auto 32px;
-      animation: popIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    @keyframes popIn {
-      from { transform: scale(0); opacity: 0; }
-      to   { transform: scale(1); opacity: 1; }
-    }
-
-    .success-badge svg {
-      width: 110px; height: 110px;
-    }
-
-    .success-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 32px;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 14px;
-    }
-
-    .success-text {
-      font-size: 16px;
-      color: rgba(255,255,255,0.88);
-      max-width: 320px;
-      margin: 0 auto;
-      line-height: 1.65;
-      font-weight: 500;
-    }
 
     /* ─── Icon-only card + tooltip ──────────────────────────────── */
     .option-card.icon-only {
@@ -1778,17 +1734,6 @@
 
       </div><!-- /steps-container -->
 
-      <!-- ── TELA DE SUCESSO ── -->
-      <div class="success-screen" id="successScreen">
-        <div class="success-badge">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3.85 8.62a4 4 0 014.78-4.77 4 4 0 016.74 0 4 4 0 014.78 4.78 4 4 0 010 6.74 4 4 0 01-4.77 4.78 4 4 0 01-6.75 0 4 4 0 01-4.78-4.77 4 4 0 010-6.76z" fill="white"/>
-            <path d="M9 12l2 2 4-4" stroke="#1e9fd4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h2 class="success-title">Parabéns!</h2>
-        <p class="success-text">Nossa equipe avaliará suas informações e preparará as melhores opções de consórcio para você.</p>
-      </div>
 
       </div><!-- /form-card -->
     </div><!-- /modal-inner -->
@@ -1902,29 +1847,7 @@
     // ─── Submit ─────────────────────────────────────────────────────
     function submitForm() {
       if (!validateStep(7)) return;
-
-      // Collect remaining data
-      formData.whatsapp = document.getElementById('whatsapp').value;
-      formData.email    = document.getElementById('email').value;
-      formData.nome     = document.getElementById('nome').value;
-      formData.parcela  = document.getElementById('parcelaSlider').value;
-      const obj = formData.objetivo;
-      if (obj === 'compra') {
-        formData.credito = document.getElementById('creditoCompraSlider').value;
-      } else if (obj === 'terreno') {
-        formData.credito = document.getElementById('creditoTerrenoSlider').value;
-      } else if (obj === 'construcao') {
-        formData.credito = document.getElementById('creditoObraSlider').value;
-      }
-
-      console.log('Form data:', formData);
-
-      // Show success
-      document.getElementById('stepsContainer').style.display = 'none';
-      document.getElementById('progressWrap').style.display = 'none';
-      const success = document.getElementById('successScreen');
-      success.classList.add('active');
-      document.getElementById('formWrapper').scrollTo({ top: 0, behavior: 'smooth' });
+      location.reload();
     }
 
     // ─── Option cards ────────────────────────────────────────────────
